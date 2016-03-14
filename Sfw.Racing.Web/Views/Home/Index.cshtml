@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div>
+    <h1>Welcome to the SFW F1 Racing League</h1>
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Step 1: Register</h3>
+        <p>
+            @{ if (User.Identity.IsAuthenticated)
+                {
+
+                    <text>You are already registered!</text>
+                }
+                else
+                {
+                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }); <text>for an account. You will need to enter a team name.</text>
+                }
+            }
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h3>Step 2: Create your Team</h3>
+        <p>
+            Create @Html.ActionLink("Your Team", "Edit", "Player") with your 100 million budget.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h3>Step 3: Questions</h3>
+        <p>Answer questions on the upcoming race to earn extra points</p>
+    </div>
+</div>

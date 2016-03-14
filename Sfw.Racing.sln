@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfw.Racing.Web", "Sfw.Racing.Web\Sfw.Racing.Web.csproj", "{623B01F0-2524-4B6D-A659-7EE37B7F51E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfw.Racing.DataRepository", "Sfw.Racing.DataRepository\Sfw.Racing.DataRepository.csproj", "{0649BDA9-9F2B-4129-8BAC-00FC219401AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfw.Web", "Sfw.Web\Sfw.Web.csproj", "{F7B5432D-F92F-44C7-B434-CFE2AD3865D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Azure|Any CPU = Azure|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{623B01F0-2524-4B6D-A659-7EE37B7F51E0}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{623B01F0-2524-4B6D-A659-7EE37B7F51E0}.Azure|Any CPU.Build.0 = Azure|Any CPU
+		{623B01F0-2524-4B6D-A659-7EE37B7F51E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{623B01F0-2524-4B6D-A659-7EE37B7F51E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{623B01F0-2524-4B6D-A659-7EE37B7F51E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{623B01F0-2524-4B6D-A659-7EE37B7F51E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0649BDA9-9F2B-4129-8BAC-00FC219401AA}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{0649BDA9-9F2B-4129-8BAC-00FC219401AA}.Azure|Any CPU.Build.0 = Azure|Any CPU
+		{0649BDA9-9F2B-4129-8BAC-00FC219401AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0649BDA9-9F2B-4129-8BAC-00FC219401AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0649BDA9-9F2B-4129-8BAC-00FC219401AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0649BDA9-9F2B-4129-8BAC-00FC219401AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7B5432D-F92F-44C7-B434-CFE2AD3865D1}.Azure|Any CPU.ActiveCfg = Azure|Any CPU
+		{F7B5432D-F92F-44C7-B434-CFE2AD3865D1}.Azure|Any CPU.Build.0 = Azure|Any CPU
+		{F7B5432D-F92F-44C7-B434-CFE2AD3865D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7B5432D-F92F-44C7-B434-CFE2AD3865D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7B5432D-F92F-44C7-B434-CFE2AD3865D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7B5432D-F92F-44C7-B434-CFE2AD3865D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,233 @@
+﻿@using Sfw.Racing.DataRepository.Model
+@model Sfw.Racing.Web.ViewModel.PlayerSelectionViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="pull-right race dl-horizontal">
+        <div class="text-right">
+            <h2>@Html.DisplayFor(model => model.PlayerSelection.RaceName)</h2>
+        </div>
+        <div class="text-right">
+            <h3>@String.Format("{0:dd/MM/yyyy}", Model.PlayerSelection.RaceDate)</h3>
+        </div>
+    
+    </div>
+    
+    <h2>@Html.DisplayFor(model => model.PlayerSelection.TeamName)</h2>
+    <h3><span class="Budget label label-success">Budget: <span class="TotalCost">@Model.PlayerSelection.BudgetSpent.ToString("0.##")</span> / <span class="MaxBudget">@Html.DisplayFor(model => model.PlayerSelection.MaxBudget)</span>m</span></h3>
+    @if (Model.PlayerSelection.FinalEntry < DateTime.Now)
+    {
+        <span class="label label-danger">Race entries are closed.</span>
+    }
+    <div class="clearfix visible-xs-block"></div>
+    <hr />
+    @using (Html.BeginForm(Mvc.Player.Actions.Edit()))
+    {
+
+        @Html.HiddenFor(model => model.PlayerSelection.TeamName)
+        @Html.HiddenFor(model => model.PlayerSelection.PlayerName)
+        @Html.HiddenFor(model => model.PlayerSelection.RaceName)
+        @Html.HiddenFor(model => model.PlayerSelection.RaceDate)
+        @Html.HiddenFor(model => model.PlayerSelection.MaxBudget)
+    <h3>Drivers</h3>
+    <div class="dl-horizontal row">
+        @Html.HiddenFor(model => model.PlayerSelection.SelectionId)
+
+      
+        @Html.ValidationSummary(false, "", new { @class = "alert alert-warning" })
+        
+
+        <div class="col-md-3 driver">
+
+
+            @if (Model.PlayerSelection.Drivers.Count > 0)
+            {
+                @Html.Partial("Driver", Model.PlayerSelection.Drivers[0])
+            }
+            else
+            {
+                @Html.Partial("Driver", new Driver())
+            }
+            @Html.DropDownListFor(m => m.PlayerSelection.Driver1Id, new SelectList(Model.Drivers, "DriverId", "NameCost", Model.PlayerSelection.Driver1Id), "Select", new { @class = "form-control DriverSelection" })
+
+        </div>
+
+        <div class="col-md-3 driver">
+
+            @if (Model.PlayerSelection.Drivers.Count > 1)
+            {
+                @Html.Partial("Driver", Model.PlayerSelection.Drivers[1])
+            }
+            else
+            {
+                @Html.Partial("Driver", new Driver())
+            }
+            @Html.DropDownListFor(m => m.PlayerSelection.Driver2Id, new SelectList(Model.Drivers, "DriverId", "NameCost", Model.PlayerSelection.Driver2Id), "Select", new { @class = "form-control DriverSelection" })
+        </div>
+
+        <div class="col-md-3 driver">
+
+            @if (Model.PlayerSelection.Drivers.Count > 2)
+            {
+                @Html.Partial("Driver", Model.PlayerSelection.Drivers[2])
+            }
+            else
+            {
+                @Html.Partial("Driver", new Driver())
+            }
+            @Html.DropDownListFor(m => m.PlayerSelection.Driver3Id, new SelectList(Model.Drivers, "DriverId", "NameCost", Model.PlayerSelection.Driver3Id), "Select", new { @class = "form-control DriverSelection" })
+        </div>
+
+        <div class="col-md-3 driver">
+            @if (Model.PlayerSelection.Drivers.Count > 3)
+            {
+                @Html.Partial("Driver", Model.PlayerSelection.Drivers[3])
+            }
+            else
+            {
+                @Html.Partial("Driver", new Driver())
+            }
+
+            @Html.DropDownListFor(m => m.PlayerSelection.Driver4Id, new SelectList(Model.Drivers, "DriverId", "NameCost", Model.PlayerSelection.Driver4Id), "Select", new { @class = "form-control DriverSelection" })
+        </div>
+    </div>
+    <div class="clearfix visible-xs-block"></div>
+
+    <div class="row">
+        <div class="col-md-6"><h3>Constructors</h3></div>
+        <div class="col-md-6"><h3>Engines</h3></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 constructor">
+            @if (Model.PlayerSelection.Constructors.Count > 0)
+            {
+                @Html.Partial("Constructor", Model.PlayerSelection.Constructors[0])
+            }
+            else
+            {
+                @Html.Partial("Constructor", new Constructor())
+            }
+            @Html.DropDownListFor(m => m.PlayerSelection.Constructor1Id, new SelectList(Model.Constructors, "ConstructorId", "NameCost", Model.PlayerSelection.Constructor1Id), "Select", new { @class = "form-control ConstructorSelection" })
+        </div>
+        <div class="col-md-3 constructor">
+            @if (Model.PlayerSelection.Constructors.Count > 1)
+            {
+                @Html.Partial("Constructor", Model.PlayerSelection.Constructors[1])
+            }
+            else
+            {
+                @Html.Partial("Constructor", new Constructor())
+            }
+            @Html.DropDownListFor(m => m.PlayerSelection.Constructor2Id, new SelectList(Model.Constructors, "ConstructorId", "NameCost", Model.PlayerSelection.Constructor2Id), "Select", new { @class = "form-control ConstructorSelection" })
+
+        </div>
+        <div class="col-md-3 engine">
+            @if (Model.PlayerSelection.Engines.Count > 0)
+            {
+                @Html.Partial("Engine", Model.PlayerSelection.Engines[0])
+            }
+            else
+            {
+                @Html.Partial("Engine", new Engine())
+            }
+            @Html.DropDownListFor(m => m.PlayerSelection.Engine1Id, new SelectList(Model.Engines, "EngineId", "NameCost", Model.PlayerSelection.Engine1Id), "Select", new { @class = "form-control EngineSelection" })
+        </div>
+        <div class="col-md-3 engine">
+            @if (Model.PlayerSelection.Engines.Count > 1)
+            {
+                @Html.Partial("Engine", Model.PlayerSelection.Engines[1])
+            }
+            else
+            {
+                @Html.Partial("Engine", new Engine())
+            }
+            @Html.DropDownListFor(m => m.PlayerSelection.Engine2Id, new SelectList(Model.Engines, "EngineId", "NameCost", Model.PlayerSelection.Engine2Id), "Select", new { @class = "form-control EngineSelection" })
+        </div>
+    </div>
+    <h3>Race Questions</h3>
+    <div class="row">
+
+        <div class="Question col-md-4">
+            <div class="pull-right label label-warning">
+                <h4 class="Points">10</h4> Pts
+            </div>
+            <h4>@Html.DisplayFor(model => model.Questions[0].QuestionText)</h4>
+            <div class="thumbnail">
+                <img src="@Url.Content("~/"+(@Model.Questions[0].Image == null ? "Content/questions/unknown.png": Model.Questions[0].Image))" alt="" class="img-responsive QuestionPic" />
+            </div>
+            <div class="caption text-center">
+                <div class="btn-group">
+                    @{
+                        for (int i = 0; i < Model.Questions[0].Answers.Count(); i++)
+                        {
+                            <label class="btn btn-primary well Answer">
+                                @Html.RadioButtonFor(model => model.PlayerSelection.Answer1Id, Model.Questions[0].Answers[i].AnswerId) @Model.Questions[0].Answers[i].AnswerText
+                            </label>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="Question col-md-4">
+            <div class="pull-right label label-warning">
+                <h4 class="Points">10</h4> Pts
+            </div>
+            <h4>@Html.DisplayFor(model => model.Questions[1].QuestionText)</h4>
+            <div class="thumbnail">
+                <img src="@Url.Content("~/"+(@Model.Questions[1].Image == null ? "Content/questions/unknown.png": Model.Questions[1].Image))" alt="" class="img-responsive QuestionPic" />
+            </div>
+            <div class="caption text-center">
+                <div class="btn-group">
+                    @{
+                        for (int i = 0; i < Model.Questions[1].Answers.Count(); i++)
+                        {
+                            <label class="btn btn-primary well Answer">
+                                @Html.RadioButtonFor(model => model.PlayerSelection.Answer2Id, Model.Questions[1].Answers[i].AnswerId) @Model.Questions[1].Answers[i].AnswerText
+                            </label>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="Question col-md-4">
+            <div class="pull-right label label-warning">
+                <h4 class="Points">10</h4> Pts
+            </div>
+            <h4>@Html.DisplayFor(model => model.Questions[2].QuestionText)</h4>
+            <div class="thumbnail">
+                <img src="@Url.Content("~/"+(@Model.Questions[2].Image == null ? "Content/questions/unknown.png": Model.Questions[2].Image))" alt="" class="img-responsive QuestionPic" />
+            </div>
+            <div class="caption text-center">
+                <div class="btn-group">
+                    @{
+                        for (int i = 0; i < Model.Questions[2].Answers.Count(); i++)
+                        {
+                            <label class="btn btn-primary well Answer">
+                                @Html.RadioButtonFor(model => model.PlayerSelection.Answer3Id, Model.Questions[2].Answers[i].AnswerId) @Model.Questions[2].Answers[i].AnswerText
+                            </label>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="text-center">
+        @if (Model.PlayerSelection.FinalEntry < DateTime.Now)
+        {
+            <span class="label label-danger">Race entries are closed. You cannot make any further changes to your team.</span>
+        }
+        else {
+            <input type="submit" value="Save Team" class="btn btn-primary btn-lg" />
+        }
+    </div>
+    }
+</div>

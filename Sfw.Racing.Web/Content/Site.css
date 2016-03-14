@@ -1,0 +1,83 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background: rgba(46, 51, 56, 0.8)!important;
+    color:#fff;
+
+}
+
+html
+{
+    background: url('Images/background.jpg') no-repeat;
+    background-size:100%;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.driver{
+    border: dashed 1px gray;
+
+}
+
+.constructor{
+    border: dashed 1px gray;
+
+}
+
+.engine{
+    border: dashed 1px gray;
+
+}
+
+.race{
+    
+}
+
+img {
+    width: 100%;
+}
+
+.validation-summary-valid
+{
+    display:none;
+}
+
+.disabled{
+    color:#ccc;
+}
+
+.Question{
+    border: dashed 1px gray;
+    background: rgba(200, 200, 200, 0.25); 
+}
+
+.Answer{
+    color:#000!important;
+    padding:18px;
+}
+
+a{
+    color:springgreen !important;
+}
+
+a:visited{
+    color:springgreen !important;
+}

@@ -1,0 +1,207 @@
+﻿@using Sfw.Racing.DataRepository.Model
+@model Sfw.Racing.Web.ViewModel.PlayerSelectionViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="pull-right race dl-horizontal">
+        <div class="text-right">
+            <h2>@Html.DisplayFor(model => model.PlayerSelection.RaceName)</h2>
+        </div>
+        <div class="text-right">
+            <h3>@String.Format("{0:dd/MM/yyyy}", Model.PlayerSelection.RaceDate)</h3>
+        </div>
+    
+    </div>
+    
+    <h2>@Html.DisplayFor(model => model.PlayerSelection.TeamName)</h2>
+    <h3><span class="Budget label label-success">Budget: <span class="TotalCost">@Model.PlayerSelection.BudgetSpent.ToString("0.##")</span> / <span class="MaxBudget">@Html.DisplayFor(model => model.PlayerSelection.MaxBudget)</span>m</span></h3>
+    <div class="clearfix visible-xs-block"></div>
+    <hr />
+
+    <h3>Drivers</h3>
+    <div class="dl-horizontal row">
+        <div class="col-md-3 driver">
+
+
+            @if (Model.PlayerSelection.Drivers.Count > 0)
+            {
+                @Html.Partial("Driver", Model.PlayerSelection.Drivers[0])
+            }
+            else
+            {
+                @Html.Partial("Driver", new Driver())
+            }
+            
+
+        </div>
+
+        <div class="col-md-3 driver">
+
+            @if (Model.PlayerSelection.Drivers.Count > 1)
+            {
+                @Html.Partial("Driver", Model.PlayerSelection.Drivers[1])
+            }
+            else
+            {
+                @Html.Partial("Driver", new Driver())
+            }
+            
+        </div>
+
+        <div class="col-md-3 driver">
+
+            @if (Model.PlayerSelection.Drivers.Count > 2)
+            {
+                @Html.Partial("Driver", Model.PlayerSelection.Drivers[2])
+            }
+            else
+            {
+                @Html.Partial("Driver", new Driver())
+            }
+            
+        </div>
+
+        <div class="col-md-3 driver">
+            @if (Model.PlayerSelection.Drivers.Count > 3)
+            {
+                @Html.Partial("Driver", Model.PlayerSelection.Drivers[3])
+            }
+            else
+            {
+                @Html.Partial("Driver", new Driver())
+            }
+
+            
+        </div>
+    </div>
+    <div class="clearfix visible-xs-block"></div>
+
+    <div class="row">
+        <div class="col-md-6"><h3>Constructors</h3></div>
+        <div class="col-md-6"><h3>Engines</h3></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 constructor">
+            @if (Model.PlayerSelection.Constructors.Count > 0)
+            {
+                @Html.Partial("Constructor", Model.PlayerSelection.Constructors[0])
+            }
+            else
+            {
+                @Html.Partial("Constructor", new Constructor())
+            }
+            
+        </div>
+        <div class="col-md-3 constructor">
+            @if (Model.PlayerSelection.Constructors.Count > 1)
+            {
+                @Html.Partial("Constructor", Model.PlayerSelection.Constructors[1])
+            }
+            else
+            {
+                @Html.Partial("Constructor", new Constructor())
+            }
+            
+
+        </div>
+        <div class="col-md-3 engine">
+            @if (Model.PlayerSelection.Engines.Count > 0)
+            {
+                @Html.Partial("Engine", Model.PlayerSelection.Engines[0])
+            }
+            else
+            {
+                @Html.Partial("Engine", new Engine())
+            }
+            
+        </div>
+        <div class="col-md-3 engine">
+            @if (Model.PlayerSelection.Engines.Count > 1)
+            {
+                @Html.Partial("Engine", Model.PlayerSelection.Engines[1])
+            }
+            else
+            {
+                @Html.Partial("Engine", new Engine())
+            }
+            
+        </div>
+    </div>
+    <h3>Race Questions</h3>
+    <div class="row">
+
+        <div class="Question col-md-4">
+            <div class="pull-right label label-warning">
+                <h4 class="Points">10</h4> Pts
+            </div>
+            <h4>@Html.DisplayFor(model => model.Questions[0].QuestionText)</h4>
+            <div class="thumbnail">
+                <img src="@Url.Content("~/"+(@Model.Questions[0].Image == null ? "Content/questions/unknown.png": Model.Questions[0].Image))" alt="" class="img-responsive QuestionPic" />
+            </div>
+            <div class="caption text-center">
+                <div class="btn-group">
+                    @{
+                        for (int i = 0; i < Model.Questions[0].Answers.Count(); i++)
+                        {
+                            <label class="btn btn-primary well Answer">
+                                @Html.RadioButtonFor(model => model.PlayerSelection.Answer1Id, Model.Questions[0].Answers[i].AnswerId, new { disabled = "disabled" }) @Model.Questions[0].Answers[i].AnswerText
+                            </label>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="Question col-md-4">
+            <div class="pull-right label label-warning">
+                <h4 class="Points">10</h4> Pts
+            </div>
+            <h4>@Html.DisplayFor(model => model.Questions[1].QuestionText)</h4>
+            <div class="thumbnail">
+                <img src="@Url.Content("~/"+(@Model.Questions[1].Image == null ? "Content/questions/unknown.png": Model.Questions[1].Image))" alt="" class="img-responsive QuestionPic" />
+            </div>
+            <div class="caption text-center">
+                <div class="btn-group">
+                    @{
+                        for (int i = 0; i < Model.Questions[1].Answers.Count(); i++)
+                        {
+                            <label class="btn btn-primary well Answer">
+                                @Html.RadioButtonFor(model => model.PlayerSelection.Answer2Id, Model.Questions[1].Answers[i].AnswerId, new { disabled = "disabled" }) @Model.Questions[1].Answers[i].AnswerText
+                            </label>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="Question col-md-4">
+            <div class="pull-right label label-warning">
+                <h4 class="Points">10</h4> Pts
+            </div>
+            <h4>@Html.DisplayFor(model => model.Questions[2].QuestionText)</h4>
+            <div class="thumbnail">
+                <img src="@Url.Content("~/"+(@Model.Questions[2].Image == null ? "Content/questions/unknown.png": Model.Questions[2].Image))" alt="" class="img-responsive QuestionPic" />
+            </div>
+            <div class="caption text-center">
+                <div class="btn-group">
+                    @{
+                        for (int i = 0; i < Model.Questions[2].Answers.Count(); i++)
+                        {
+                            <label class="btn btn-primary well Answer">
+                                @Html.RadioButtonFor(model => model.PlayerSelection.Answer3Id, Model.Questions[2].Answers[i].AnswerId, new { disabled = "disabled" }) @Model.Questions[2].Answers[i].AnswerText
+                            </label>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    
+</div>
