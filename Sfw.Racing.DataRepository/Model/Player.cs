@@ -13,5 +13,6 @@ namespace Sfw.Racing.DataRepository.Model
         public string Name { get; set; }
         public int Points { get; set; }
         public decimal BudgetSpent { get; set; }
+        public IList<League> Leagues { get; set; }
     }
 }

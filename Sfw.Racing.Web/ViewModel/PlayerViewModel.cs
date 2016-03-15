@@ -35,5 +35,7 @@ namespace Sfw.Racing.Web.ViewModel
             }
             return model;
         }
+
+        public IList<League> Leagues { get; set; }
     }
 }

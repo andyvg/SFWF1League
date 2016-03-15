@@ -13,7 +13,6 @@ $(document).ready(function () {
         ignore: [] // or ignore: "" depending on the jquery version
     });
 
-
     $(".DriverSelection").change(function () {
 
         var driver = $(this);

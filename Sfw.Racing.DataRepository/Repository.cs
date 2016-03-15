@@ -266,5 +266,48 @@ namespace Sfw.Racing.DataRepository
 
             return response;
         }
+
+        public Player GetPlayerById(int PlayerId)
+        {
+            Player player = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+                var query = conn.Query("GetPlayerById", new { PlayerId = PlayerId },
+                    Query.Returns(Some<Player>.Records)
+                        .ThenChildren(Some<League>.Records));
+
+                player = query[0];
+            }
+
+            return player;
+        }
+
+        public Response<Player> CreatePlayerLeague(int PlayerId, int LeagueId)
+        {
+            Response<Player> response = new Response<Player>() { Success = false };
+
+            using (IDbConnection conn = factory.Create())
+            {
+                var query = conn.Execute("CreatePlayerLeague", new { PlayerId = PlayerId, LeagueId = LeagueId });
+                response.Success = true;
+            }
+
+            response.Result = GetPlayerById(PlayerId);
+
+            return response;
+        }
+
+        public IList<Player> GetPlayerByLeagueId(int LeagueId)
+        {
+            IList<Player> players = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+                players = conn.Query<Player>("GetPlayersByLeagueId", new { LeagueId = LeagueId } );
+            }
+
+            return players;
+        }
     }
 }

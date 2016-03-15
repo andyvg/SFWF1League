@@ -20,9 +20,12 @@ namespace Sfw.Racing.DataRepository.Core
         IList<Question> GetQuestions();
         int CreatePlayer(string Name, string TeamName);
         IList<Player> GetPlayers();
+        IList<Player> GetPlayerByLeagueId(int LeagueId);
         Player GetPlayerByTeamName(string TeamName);
         DateTime GetFinalEntryTime();
         IList<RaceResult> GetRaceResults();
         Response<IList<RaceResult>> CreateRaceResults(IList<RaceResult> results);
+        Player GetPlayerById(int PlayerId);
+        Response<Player> CreatePlayerLeague(int PlayerId, int LeagueId);
     }
 }

@@ -28,6 +28,7 @@ using T4MVC;
 public static partial class Mvc
 {
     public static Sfw.Racing.Web.Controllers.AccountController Account = new Sfw.Racing.Web.Controllers.T4MVC_AccountController();
+    public static Sfw.Racing.Web.Controllers.Base.AuthorizeController Authorize = new Sfw.Racing.Web.Controllers.Base.T4MVC_AuthorizeController();
     public static Sfw.Racing.Web.Controllers.ConstructorController Constructor = new Sfw.Racing.Web.Controllers.T4MVC_ConstructorController();
     public static Sfw.Racing.Web.Controllers.DriverController Driver = new Sfw.Racing.Web.Controllers.T4MVC_DriverController();
     public static Sfw.Racing.Web.Controllers.EngineController Engine = new Sfw.Racing.Web.Controllers.T4MVC_EngineController();

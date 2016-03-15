@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Sfw.Racing.Web.ViewModel.PlayerViewModel>
+﻿@model Sfw.Racing.Web.ViewModel.PlayerListViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -7,24 +7,40 @@
 
 <h2>Registered Teams</h2>
 
+@using (Html.BeginForm(Mvc.Player.Actions.Index(), FormMethod.Get))
+{
+    if (Model.Leagues.Count > 1)
+    {
+        <div class="col-md-3">
+            @Html.DropDownListFor(m => m.SelectedLeagueId, new SelectList(Model.Leagues, "LeagueId", "Name", Model.SelectedLeagueId), new { @class = "form-control LeagueSelection" })
+        </div>
+
+        <div class="col-md-3">
+            <input type="submit" value="Go" class="btn btn-primary" />
+        </div>
+    }
+}
+
+<div class="clearfix"></div>
+&nbsp;
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TeamName)
+            @Html.DisplayNameFor(model => model.Players[0].TeamName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Players[0].Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Points)
+            @Html.DisplayNameFor(model => model.Players[0].Points)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BudgetSpent)
+            @Html.DisplayNameFor(model => model.Players[0].BudgetSpent)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Players) {
     <tr>
         <td>
             @Html.ActionLink(item.TeamName, Mvc.Player.Detail(item.TeamName))

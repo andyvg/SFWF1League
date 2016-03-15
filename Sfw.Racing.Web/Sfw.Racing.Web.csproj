@@ -191,10 +191,14 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AuthorizeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ConstructorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Base\AuthorizeController.cs" />
     <Compile Include="Controllers\ConstructorController.cs" />
     <Compile Include="Controllers\EngineController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
@@ -237,6 +241,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\PlayerListViewModel.cs" />
     <Compile Include="ViewModel\PlayerSelectionViewModel.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\RaceResultViewModel.cs" />

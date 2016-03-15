@@ -68,6 +68,7 @@
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Model\Constructor.cs" />
     <Compile Include="Model\Answer.cs" />
+    <Compile Include="Model\League.cs" />
     <Compile Include="Model\StatusCode.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Question.cs" />

@@ -6,25 +6,48 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Sfw.Racing.Web.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
+using Sfw.Racing.Web.Controllers.Base;
+using Sfw.Racing.DataRepository.Model;
 
 namespace Sfw.Racing.Web.Controllers
 {
-    [Authorize]
-    public partial class PlayerController : Controller
+    public partial class PlayerController : AuthorizeController
     {
         private IRepository repository;
         public PlayerController(IRepository repository)
         {
             this.repository = repository;
         }
+        protected async Task<IList<League>> CurrentLeagues()
+        {
+            int PlayerId = await CurrentPlayerId();
+
+            var player = repository.GetPlayerById(PlayerId);
+
+            var leagues = player.Leagues;
+
+            return leagues;
+        }
 
         [HttpGet]
-        public virtual ActionResult Index()
+        public virtual async Task<ActionResult> Index(int? SelectedLeagueId)
         {
-            var model = PlayerViewModel.Create(repository.GetPlayers());
+            PlayerListViewModel model = new PlayerListViewModel()
+            {
+                Leagues = await CurrentLeagues(),
+            };
+
+            if (SelectedLeagueId.HasValue)
+            {
+                model.SelectedLeagueId = SelectedLeagueId.Value;
+            }
+            else if(model.Leagues.Count() > 0)
+            {
+                model.SelectedLeagueId = model.Leagues[0].LeagueId;
+            }
+
+            model.Players = PlayerViewModel.Create(repository.GetPlayerByLeagueId(model.SelectedLeagueId));
 
             return View(model);
         }
@@ -41,15 +64,6 @@ namespace Sfw.Racing.Web.Controllers
             };
 
             return View(model);
-        }
-
-        private async Task<int> CurrentPlayerId()
-        {
-            var appManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-
-            var user = await appManager.FindByIdAsync(User.Identity.GetUserId());
-
-            return user.PlayerId;
         }
 
         // GET: Player

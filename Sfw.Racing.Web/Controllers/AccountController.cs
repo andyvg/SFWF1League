@@ -45,7 +45,16 @@ namespace Sfw.Racing.Web.Controllers
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                ApplicationUserManager manager = _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                manager.PasswordValidator = new PasswordValidator
+                {
+                    RequiredLength = 6,
+                    RequireNonLetterOrDigit = false,
+                    RequireDigit = false,
+                    RequireLowercase = false,
+                    RequireUppercase = false
+                };
+                return manager;
             }
             private set
             {
@@ -166,6 +175,9 @@ namespace Sfw.Racing.Web.Controllers
                     user.PlayerId = playerId;
 
                     await UserManager.UpdateAsync(user);
+
+                    //TODO hardcode player to join league 1
+                    repo.CreatePlayerLeague(user.PlayerId, 1);
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 

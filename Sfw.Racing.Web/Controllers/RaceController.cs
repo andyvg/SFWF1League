@@ -1,5 +1,6 @@
 ﻿using Sfw.Racing.DataRepository.Core;
 using Sfw.Racing.DataRepository.Model;
+using Sfw.Racing.Web.Controllers.Base;
 using Sfw.Racing.Web.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Sfw.Racing.Web.Controllers
 {
-    public partial class RaceController : Controller
+    public partial class RaceController : AuthorizeController
     {
         private IRepository repository;
         public RaceController(IRepository repository)

@@ -18,7 +18,7 @@ namespace Sfw.Racing.Web.Helper
 
         public override string FormatErrorMessage(string name)
         {
-            return "You cannot select the same component more than once";
+            return "You cannot select any item more than once";
         }
 
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
