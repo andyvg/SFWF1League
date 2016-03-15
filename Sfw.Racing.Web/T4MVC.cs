@@ -34,6 +34,7 @@ public static partial class Mvc
     public static Sfw.Racing.Web.Controllers.HomeController Home = new Sfw.Racing.Web.Controllers.T4MVC_HomeController();
     public static Sfw.Racing.Web.Controllers.ManageController Manage = new Sfw.Racing.Web.Controllers.T4MVC_ManageController();
     public static Sfw.Racing.Web.Controllers.PlayerController Player = new Sfw.Racing.Web.Controllers.T4MVC_PlayerController();
+    public static Sfw.Racing.Web.Controllers.RaceController Race = new Sfw.Racing.Web.Controllers.T4MVC_RaceController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 

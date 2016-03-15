@@ -147,24 +147,39 @@ namespace Sfw.Racing.DataRepository
             return questions;
         }
 
-        public PlayerSelection UpdatePlayerSelection(int PlayerId, int Driver1Id, int Driver2Id, int Driver3Id, int Driver4Id, int Constructor1Id, int Constructor2Id, int Engine1Id, int Engine2Id, int Answer1Id, int Answer2Id, int Answer3Id)
+        public Response<PlayerSelection> UpdatePlayerSelection(int PlayerId, int Driver1Id, int Driver2Id, int Driver3Id, int Driver4Id, int Constructor1Id, int Constructor2Id, int Engine1Id, int Engine2Id, int Answer1Id, int Answer2Id, int Answer3Id)
         {
+            Response<PlayerSelection> response = new Response<PlayerSelection>() { Success = false };
+
             using (IDbConnection conn = factory.Create())
             {
                 try {
                     var query = conn.Execute("UpdatePlayerSelection", new { PlayerId = PlayerId, Driver1Id = Driver1Id, Driver2Id = Driver2Id, Driver3Id = Driver3Id, Driver4Id = Driver4Id, Constructor1Id = Constructor1Id, Constructor2Id = Constructor2Id, Engine1Id = Engine1Id, Engine2Id = Engine2Id, Answer1Id = Answer1Id, Answer2Id = Answer2Id, Answer3Id = Answer3Id });
+                    response.Success = true;
                 }
                 catch (SqlException e)
                 {
-                    //TODO handle other types of errors
                     if (e.Message.Contains("BUDGET_ERROR"))
                     {
-                        return null;
+                        response.Message = "Could not save. You have exceeded your budget.";
+                        response.Status = StatusCode.Error_Budget_Exceeded;
                     }
+                    else
+                    {
+                        response.Message = "Could not save. Unknown Database Exception.";
+                        response.Status = StatusCode.Error_Unknown;
+                    }
+                }
+                catch(Exception)
+                {
+                    response.Message = "Could not save. Unknown Exception.";
+                    response.Status = StatusCode.Error_Unknown;
                 }
             }
 
-            return GetPlayerSelection(PlayerId);
+            response.Result = GetPlayerSelection(PlayerId);
+
+            return response;
         }
 
         public IList<Player> GetPlayers()
@@ -201,6 +216,55 @@ namespace Sfw.Racing.DataRepository
             }
 
             return datetime;
+        }
+
+        public IList<RaceResult> GetRaceResults()
+        {
+            IList<RaceResult> results = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+                results = conn.Query<RaceResult>("GetRaceResult");
+            }
+
+            return results;
+        }
+
+        public Response<IList<RaceResult>> CreateRaceResults(IList<RaceResult> results)
+        {
+            Response<IList<RaceResult>> response = new Response<IList<RaceResult>>() { Success = false };
+
+            using (IDbConnection conn = factory.Create())
+            {
+                try
+                {
+                    conn.Open();
+
+                    //delete current race results
+                    conn.Execute("DeleteRaceResults");
+
+                    using (var trans = conn.BeginTransaction())
+                    {
+                        foreach (RaceResult result in results)
+                        {
+                            var query = conn.Execute("CreateRaceResult", new { DriverId = result.DriverId, Position = result.Position, Disqualified = result.Disqualified, Classified = result.Classified }, transaction: trans);
+                        }
+
+                        conn.Execute("UpdateRaceResults", transaction: trans);
+                        response.Success = true;
+                        trans.Commit();
+                    }
+                }
+                catch (Exception e)
+                {
+                    response.Message = "Could not save. " + e.Message;
+                    response.Status = StatusCode.Error_Unknown;
+                }
+            }
+
+            response.Result = GetRaceResults();
+
+            return response;
         }
     }
 }

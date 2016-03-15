@@ -1,0 +1,68 @@
+﻿@model Sfw.Racing.Web.ViewModel.RaceResultViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Race Result</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <table class="table">
+            <tr>
+                <th>Position</th>
+                <th>Driver</th>
+                <th>Classified</th>
+                <th>Disqualified</th>
+            </tr>
+            
+
+        @{
+            for (int i = 0; i < Model.Results.Count(); i++)
+            {
+                <tr>
+                <td>
+
+                    @Html.DisplayFor(model => model.Results[i].Position, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.Results[i].Position)
+                </td>
+
+                <td>
+                    @Html.DropDownListFor(model => model.Results[i].DriverId, new SelectList(Model.Drivers, "DriverId", "Name", Model.Results[i].DriverId), "Select", new { @class = "form-control DriverSelection" })
+                    @Html.ValidationMessageFor(model => model.Results[i].DriverId, "", new { @class = "text-danger" })
+                </td>
+
+                <td>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Results[i].Classified)
+                        @Html.ValidationMessageFor(model => model.Results[i].Classified, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+
+                <td>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Results[i].Disqualified)
+                        @Html.ValidationMessageFor(model => model.Results[i].Disqualified, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+                </tr>
+
+            }
+        }
+
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,74 @@
+﻿@model Sfw.Racing.Web.ViewModel.RaceResultViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Current Race Result</h2>
+
+
+<div class="form-horizontal">
+
+    <table class="table">
+        <tr>
+            <th>Position</th>
+            <th>Driver</th>
+            <th>Constructor</th>
+            <th>Classified</th>
+            <th>Disqualified</th>
+            <th>Position Pts</th>
+            <th>Fastest Lap Pts</th>
+            <th>Teammate Pts</th>
+            <th>Total Pts</th>
+        </tr>
+            
+
+    @{
+        for (int i = 0; i < Model.Results.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Results[i].Position, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+
+                <td>
+                    @Model.Drivers.Where(p => p.DriverId == Model.Results[i].DriverId).FirstOrDefault().Name
+                </td>
+
+                <td>
+                    @Model.Drivers.Where(p => p.DriverId == Model.Results[i].DriverId).FirstOrDefault().ConstructorName
+                </td>
+
+                <td>
+                    <div class="checkbox">
+                        @Html.DisplayFor(model => model.Results[i].Classified)
+                    </div>
+                </td>
+
+                <td>
+                    <div class="checkbox">
+                        @Html.DisplayFor(model => model.Results[i].Disqualified)
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Results[i].PositionPoints, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Results[i].FastestLapPoints, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Results[i].TeammatePoints, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Results[i].TotalPoints, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+            </tr>
+
+        }
+    }
+
+    </table>
+
+    @Html.ActionLink("Edit Results", Mvc.Race.Create())
+</div>

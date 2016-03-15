@@ -81,7 +81,7 @@ namespace Sfw.Racing.Web.Controllers
 
                     model = new PlayerSelectionViewModel()
                     {
-                        PlayerSelection = result ?? model.PlayerSelection,
+                        PlayerSelection = result.Success ? result.Result : model.PlayerSelection,
                         Drivers = repository.GetDrivers(),
                         Constructors = repository.GetConstructors(),
                         Engines = repository.GetEngines(),
@@ -89,9 +89,9 @@ namespace Sfw.Racing.Web.Controllers
                     };
 
 
-                    if (result == null)
+                    if (!result.Success)
                     {
-                        ModelState.AddModelError("Driver1Id", "Could not save. You have exceeded your budget.");
+                        ModelState.AddModelError("Driver1Id", result.Message);
                         model.UpdateSelection();
                     }
                 }

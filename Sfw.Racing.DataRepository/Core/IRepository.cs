@@ -16,11 +16,13 @@ namespace Sfw.Racing.DataRepository.Core
         IList<Constructor> GetConstructors();
         IList<Engine> GetEngines();
         PlayerSelection GetPlayerSelection(int PlayerId);
-        PlayerSelection UpdatePlayerSelection(int PlayerId, int Driver1Id, int Driver2Id, int Driver3Id, int Driver4Id, int Constructor1Id, int Constructor2Id, int Engine1Id, int Engine2Id, int Answer1Id, int Answer2Id, int Answer3Id);
+        Response<PlayerSelection> UpdatePlayerSelection(int PlayerId, int Driver1Id, int Driver2Id, int Driver3Id, int Driver4Id, int Constructor1Id, int Constructor2Id, int Engine1Id, int Engine2Id, int Answer1Id, int Answer2Id, int Answer3Id);
         IList<Question> GetQuestions();
         int CreatePlayer(string Name, string TeamName);
         IList<Player> GetPlayers();
         Player GetPlayerByTeamName(string TeamName);
         DateTime GetFinalEntryTime();
+        IList<RaceResult> GetRaceResults();
+        Response<IList<RaceResult>> CreateRaceResults(IList<RaceResult> results);
     }
 }

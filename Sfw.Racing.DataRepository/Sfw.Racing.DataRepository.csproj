@@ -68,11 +68,14 @@
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Model\Constructor.cs" />
     <Compile Include="Model\Answer.cs" />
+    <Compile Include="Model\StatusCode.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Question.cs" />
     <Compile Include="Model\Engine.cs" />
     <Compile Include="Model\Driver.cs" />
     <Compile Include="Model\PlayerSelection.cs" />
+    <Compile Include="Model\RaceResult.cs" />
+    <Compile Include="Model\Response.cs" />
     <Compile Include="OutputParams.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
