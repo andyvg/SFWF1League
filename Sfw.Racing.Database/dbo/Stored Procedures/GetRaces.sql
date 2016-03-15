@@ -1,0 +1,2 @@
+﻿
+CREATE PROCEDURE GetRaces AS SELECT * FROM Race

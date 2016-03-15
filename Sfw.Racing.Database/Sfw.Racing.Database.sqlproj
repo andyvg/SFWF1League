@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Sfw.Racing.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{f6d8e550-0bce-4160-be01-3a4cc6332dc0}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Sfw.Racing.Database</RootNamespace>
+    <AssemblyName>Sfw.Racing.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Selection.sql" />
+    <Build Include="dbo\Tables\RaceResult.sql" />
+    <Build Include="dbo\Tables\RacePoints.sql" />
+    <Build Include="dbo\Tables\Race.sql" />
+    <Build Include="dbo\Tables\Question.sql" />
+    <Build Include="dbo\Tables\PlayerLeague.sql" />
+    <Build Include="dbo\Tables\Player.sql" />
+    <Build Include="dbo\Tables\League.sql" />
+    <Build Include="dbo\Tables\EngineResult.sql" />
+    <Build Include="dbo\Tables\Engine.sql" />
+    <Build Include="dbo\Tables\Driver.sql" />
+    <Build Include="dbo\Tables\CurrentRace.sql" />
+    <Build Include="dbo\Tables\ConstructorResult.sql" />
+    <Build Include="dbo\Tables\Constructor.sql" />
+    <Build Include="dbo\Tables\Answer.sql" />
+    <Build Include="dbo\Views\CurrentSelection.sql" />
+    <Build Include="dbo\Functions\GetCost.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateRaceResults.sql" />
+    <Build Include="dbo\Stored Procedures\UpdatePlayerSelection.sql" />
+    <Build Include="dbo\Stored Procedures\GetRaces.sql" />
+    <Build Include="dbo\Stored Procedures\GetRaceResult.sql" />
+    <Build Include="dbo\Stored Procedures\GetQuestions.sql" />
+    <Build Include="dbo\Stored Procedures\GetPlayerSelectionByPlayerId.sql" />
+    <Build Include="dbo\Stored Procedures\GetPlayersByLeagueId.sql" />
+    <Build Include="dbo\Stored Procedures\GetPlayers.sql" />
+    <Build Include="dbo\Stored Procedures\GetPlayerByTeamName.sql" />
+    <Build Include="dbo\Stored Procedures\GetPlayerById.sql" />
+    <Build Include="dbo\Stored Procedures\GetFinalEntryTime.sql" />
+    <Build Include="dbo\Stored Procedures\GetEngines.sql" />
+    <Build Include="dbo\Stored Procedures\GetEngineById.sql" />
+    <Build Include="dbo\Stored Procedures\GetDrivers.sql" />
+    <Build Include="dbo\Stored Procedures\GetDriverById.sql" />
+    <Build Include="dbo\Stored Procedures\GetConstructors.sql" />
+    <Build Include="dbo\Stored Procedures\GetConstructorById.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteRaceResults.sql" />
+    <Build Include="dbo\Stored Procedures\CreateRaceResult.sql" />
+    <Build Include="dbo\Stored Procedures\CreatePlayerLeague.sql" />
+    <Build Include="dbo\Stored Procedures\CreatePlayer.sql" />
+  </ItemGroup>
+</Project>

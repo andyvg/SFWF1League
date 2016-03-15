@@ -25,8 +25,6 @@ namespace Sfw.Racing.Web.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
-            var x = repository.GetDrivers();
-
             return View();
         }
 
