@@ -105,7 +105,7 @@ namespace Sfw.Racing.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Index
         {
-            public readonly string Id = "Id";
+            public readonly string SelectedLeagueId = "SelectedLeagueId";
         }
         static readonly ActionParamsClass_Detail s_params_Detail = new ActionParamsClass_Detail();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -113,7 +113,7 @@ namespace Sfw.Racing.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Detail
         {
-            public readonly string Id = "Id";
+            public readonly string TeamName = "TeamName";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -155,26 +155,26 @@ namespace Sfw.Racing.Web.Controllers
         public T4MVC_PlayerController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int? Id);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int? SelectedLeagueId);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index(int? Id)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index(int? SelectedLeagueId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Id", Id);
-            IndexOverride(callInfo, Id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "SelectedLeagueId", SelectedLeagueId);
+            IndexOverride(callInfo, SelectedLeagueId);
             return System.Threading.Tasks.Task.FromResult(callInfo as System.Web.Mvc.ActionResult);
         }
 
         [NonAction]
-        partial void DetailOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string Id);
+        partial void DetailOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string TeamName);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Detail(string Id)
+        public override System.Web.Mvc.ActionResult Detail(string TeamName)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Detail);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "Id", Id);
-            DetailOverride(callInfo, Id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "TeamName", TeamName);
+            DetailOverride(callInfo, TeamName);
             return callInfo;
         }
 

@@ -53,9 +53,9 @@ namespace Sfw.Racing.Web.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Detail(string Id)
+        public virtual ActionResult Detail(string TeamName)
         {
-            var player = repository.GetPlayerByTeamName(Id);
+            var player = repository.GetPlayerByTeamName(TeamName);
 
             PlayerSelectionViewModel model = new PlayerSelectionViewModel()
             {
