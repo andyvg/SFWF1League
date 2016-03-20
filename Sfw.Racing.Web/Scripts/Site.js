@@ -5,6 +5,8 @@ $.validator.setDefaults({
 
 $(document).ready(function () {
 
+    $(".table").tablesorter();
+
     $('form').validate({
         ignore: []
     });

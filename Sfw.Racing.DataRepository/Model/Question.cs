@@ -15,6 +15,7 @@ namespace Sfw.Racing.DataRepository.Model
         public string QuestionText { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+        public int Points { get; set; }
         public int SortOrder { get; set; }
         [ChildRecords]
         public IList<Answer> Answers { get; set; }

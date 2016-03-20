@@ -26,6 +26,9 @@ namespace Sfw.Racing.Web
             bundles.Add(new ScriptBundle("~/bundles/Site").Include(
                       "~/Scripts/Site.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/tablesorter").Include(
+                     "~/Scripts/jquery.tablesorter.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/Site.css"));

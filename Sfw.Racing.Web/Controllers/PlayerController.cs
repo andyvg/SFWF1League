@@ -60,8 +60,13 @@ namespace Sfw.Racing.Web.Controllers
             PlayerSelectionViewModel model = new PlayerSelectionViewModel()
             {
                 PlayerSelection = repository.GetPlayerSelection(player.PlayerId),
-                Questions = repository.GetQuestions()
+                Questions = repository.GetQuestions(),
             };
+
+            model.DriverPoints = repository.GetDriverPointsBySelectionId(model.PlayerSelection.SelectionId);
+            model.ConstructorPoints = repository.GetConstructorPointsBySelectionId(model.PlayerSelection.SelectionId);
+            model.EnginePoints = repository.GetEnginePointsBySelectionId(model.PlayerSelection.SelectionId);
+            model.QuestionPoints = repository.GetQuestionPointsBySelectionId(model.PlayerSelection.SelectionId);
 
             return View(model);
         }

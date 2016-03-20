@@ -102,5 +102,14 @@
     <Build Include="dbo\Stored Procedures\CreateRaceResult.sql" />
     <Build Include="dbo\Stored Procedures\CreatePlayerLeague.sql" />
     <Build Include="dbo\Stored Procedures\CreatePlayer.sql" />
+    <Build Include="dbo\Views\PlayerQuestionPoints.sql" />
+    <Build Include="dbo\Views\PlayerEnginePoints.sql" />
+    <Build Include="dbo\Views\PlayerDriverPoints.sql" />
+    <Build Include="dbo\Views\PlayerConstructorPoints.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateFastestLap.sql" />
+    <Build Include="dbo\Stored Procedures\GetQuestionPointsBySelectionId.sql" />
+    <Build Include="dbo\Stored Procedures\GetEnginePointsBySelectionId.sql" />
+    <Build Include="dbo\Stored Procedures\GetDriverPointsBySelectionId.sql" />
+    <Build Include="dbo\Stored Procedures\GetConstructorPointsBySelectionId.sql" />
   </ItemGroup>
 </Project>

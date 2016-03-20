@@ -62,7 +62,7 @@ namespace Sfw.Racing.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var response = repository.CreateRaceResults(model.Results);
+                var response = repository.CreateRaceResults(model.Results, model.FastestLapDriverId);
                 if (response.Success)
                 {
                     return RedirectToAction(Mvc.Race.Actions.Index());

@@ -11,7 +11,17 @@ namespace Sfw.Racing.DataRepository.Model
         public int PlayerId { get; set; }
         public string TeamName { get; set; }
         public string Name { get; set; }
-        public int Points { get; set; }
+        public int Points
+        {
+            get
+            {
+                return DriverPoints + EnginePoints + ConstructorPoints + QuestionPoints;
+            }
+        }
+        public int DriverPoints { get; set; }
+        public int EnginePoints { get; set; }
+        public int ConstructorPoints { get; set; }
+        public int QuestionPoints { get; set; }
         public decimal BudgetSpent { get; set; }
         public IList<League> Leagues { get; set; }
     }

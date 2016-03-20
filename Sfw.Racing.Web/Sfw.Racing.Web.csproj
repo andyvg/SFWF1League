@@ -241,6 +241,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\QuestionScoreViewModel.cs" />
+    <Compile Include="ViewModel\ConstructorScoreViewModel.cs" />
+    <Compile Include="ViewModel\EngineScoreViewModel.cs" />
+    <Compile Include="ViewModel\DriverScoreViewModel.cs" />
     <Compile Include="ViewModel\PlayerListViewModel.cs" />
     <Compile Include="ViewModel\PlayerSelectionViewModel.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
@@ -297,6 +301,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="pager\first.png" />
+    <Content Include="pager\last.png" />
+    <Content Include="pager\next.png" />
+    <Content Include="pager\pager.css" />
+    <Content Include="pager\prev.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\sfwf1 - Web Deploy.pubxml" />
@@ -304,6 +313,9 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.tablesorter.js" />
+    <Content Include="Scripts\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\jquery.tablesorter.pager.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -318,6 +330,10 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
     <None Include="T4MVC.tt.settings.xml" />
+    <Content Include="sorter\asc.gif" />
+    <Content Include="sorter\bg.gif" />
+    <Content Include="sorter\desc.gif" />
+    <Content Include="sorter\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -353,14 +369,17 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Player\Edit.cshtml" />
-    <Content Include="Views\Player\Driver.cshtml" />
+    <Content Include="Views\Player\DriverDetail.cshtml" />
     <None Include="T4MVC.tt.hooks.t4" />
-    <Content Include="Views\Player\Constructor.cshtml" />
-    <Content Include="Views\Player\Engine.cshtml" />
+    <Content Include="Views\Player\ConstructorDetail.cshtml" />
+    <Content Include="Views\Player\EngineDetail.cshtml" />
     <Content Include="Views\Player\Index.cshtml" />
     <Content Include="Views\Player\Detail.cshtml" />
     <Content Include="Views\Race\Create.cshtml" />
     <Content Include="Views\Race\Index.cshtml" />
+    <Content Include="Views\Player\ConstructorEdit.cshtml" />
+    <Content Include="Views\Player\DriverEdit.cshtml" />
+    <Content Include="Views\Player\EngineEdit.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

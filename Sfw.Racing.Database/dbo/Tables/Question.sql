@@ -5,6 +5,9 @@
     [Description]  VARCHAR (MAX) NULL,
     [Image]        VARCHAR (100) NULL,
     [SortOrder]    INT           NOT NULL,
+    [Points]       INT           DEFAULT ((10)) NOT NULL,
     CONSTRAINT [PK_Question_Id] PRIMARY KEY CLUSTERED ([QuestionId] ASC)
 );
+
+
 

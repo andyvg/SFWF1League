@@ -230,7 +230,7 @@ namespace Sfw.Racing.DataRepository
             return results;
         }
 
-        public Response<IList<RaceResult>> CreateRaceResults(IList<RaceResult> results)
+        public Response<IList<RaceResult>> CreateRaceResults(IList<RaceResult> results, int FastestLapDriverId)
         {
             Response<IList<RaceResult>> response = new Response<IList<RaceResult>>() { Success = false };
 
@@ -251,6 +251,7 @@ namespace Sfw.Racing.DataRepository
                         }
 
                         conn.Execute("UpdateRaceResults", transaction: trans);
+                        conn.Execute("UpdateFastestLap", new { DriverId = FastestLapDriverId }, transaction: trans);
                         response.Success = true;
                         trans.Commit();
                     }
@@ -308,6 +309,54 @@ namespace Sfw.Racing.DataRepository
             }
 
             return players;
+        }
+
+        public IList<DriverPoints> GetDriverPointsBySelectionId(int SelectionId)
+        {
+            IList<DriverPoints> points = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+                points = conn.Query<DriverPoints>("GetDriverPointsBySelectionId", new { SelectionId = SelectionId });
+            }
+
+            return points;
+        }
+
+        public IList<EnginePoints> GetEnginePointsBySelectionId(int SelectionId)
+        {
+            IList<EnginePoints> points = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+                points = conn.Query<EnginePoints>("GetEnginePointsBySelectionId", new { SelectionId = SelectionId });
+            }
+
+            return points;
+        }
+
+        public IList<ConstructorPoints> GetConstructorPointsBySelectionId(int SelectionId)
+        {
+            IList<ConstructorPoints> points = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+                points = conn.Query<ConstructorPoints>("GetConstructorPointsBySelectionId", new { SelectionId = SelectionId });
+            }
+
+            return points;
+        }
+
+        public IList<QuestionPoints> GetQuestionPointsBySelectionId(int SelectionId)
+        {
+            IList<QuestionPoints> points = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+                points = conn.Query<QuestionPoints>("GetQuestionPointsBySelectionId", new { SelectionId = SelectionId });
+            }
+
+            return points;
         }
     }
 }

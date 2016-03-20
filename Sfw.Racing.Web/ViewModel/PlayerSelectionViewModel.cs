@@ -16,8 +16,20 @@ namespace Sfw.Racing.Web.ViewModel
         public IList<Driver> Drivers { get; set; }
         public IList<Constructor> Constructors { get; set; }
         public IList<Engine> Engines { get; set; }
-
         public IList<Question> Questions { get; set; }
+
+        public IList<DriverPoints> DriverPoints { get; set; }
+        public IList<ConstructorPoints> ConstructorPoints { get; set; }
+        public IList<EnginePoints> EnginePoints { get; set; }
+        public IList<QuestionPoints> QuestionPoints { get; set; }
+
+        public int TotalScore
+        {
+            get
+            {
+                return DriverPoints.Sum(p => p.TotalPoints) + ConstructorPoints.Sum(p => p.TotalPoints) + EnginePoints.Sum(p => p.TotalPoints) + QuestionPoints.Sum(p => p.Points);
+            }
+        }
 
         [EnforceTrueAttribute(ErrorMessage = "You cannot select the same driver twice")]
         public bool AreDriversUnique {

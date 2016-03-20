@@ -47,11 +47,11 @@
 
             @if (Model.PlayerSelection.Drivers.Count > 0)
             {
-                @Html.Partial("Driver", Model.PlayerSelection.Drivers[0])
+                @Html.Partial("DriverEdit", Model.PlayerSelection.Drivers[0])
             }
             else
             {
-                @Html.Partial("Driver", new Driver())
+                @Html.Partial("DriverEdit", new Driver())
             }
             @Html.DropDownListFor(m => m.PlayerSelection.Driver1Id, new SelectList(Model.Drivers, "DriverId", "NameCost", Model.PlayerSelection.Driver1Id), "Select", new { @class = "form-control DriverSelection" })
 
@@ -61,11 +61,11 @@
 
             @if (Model.PlayerSelection.Drivers.Count > 1)
             {
-                @Html.Partial("Driver", Model.PlayerSelection.Drivers[1])
+                @Html.Partial("DriverEdit", Model.PlayerSelection.Drivers[1])
             }
             else
             {
-                @Html.Partial("Driver", new Driver())
+                @Html.Partial("DriverEdit", new Driver())
             }
             @Html.DropDownListFor(m => m.PlayerSelection.Driver2Id, new SelectList(Model.Drivers, "DriverId", "NameCost", Model.PlayerSelection.Driver2Id), "Select", new { @class = "form-control DriverSelection" })
         </div>
@@ -74,11 +74,11 @@
 
             @if (Model.PlayerSelection.Drivers.Count > 2)
             {
-                @Html.Partial("Driver", Model.PlayerSelection.Drivers[2])
+                @Html.Partial("DriverEdit", Model.PlayerSelection.Drivers[2])
             }
             else
             {
-                @Html.Partial("Driver", new Driver())
+                @Html.Partial("DriverEdit", new Driver())
             }
             @Html.DropDownListFor(m => m.PlayerSelection.Driver3Id, new SelectList(Model.Drivers, "DriverId", "NameCost", Model.PlayerSelection.Driver3Id), "Select", new { @class = "form-control DriverSelection" })
         </div>
@@ -86,11 +86,11 @@
         <div class="col-md-3 driver">
             @if (Model.PlayerSelection.Drivers.Count > 3)
             {
-                @Html.Partial("Driver", Model.PlayerSelection.Drivers[3])
+                @Html.Partial("DriverEdit", Model.PlayerSelection.Drivers[3])
             }
             else
             {
-                @Html.Partial("Driver", new Driver())
+                @Html.Partial("DriverEdit", new Driver())
             }
 
             @Html.DropDownListFor(m => m.PlayerSelection.Driver4Id, new SelectList(Model.Drivers, "DriverId", "NameCost", Model.PlayerSelection.Driver4Id), "Select", new { @class = "form-control DriverSelection" })
@@ -107,22 +107,22 @@
         <div class="col-md-3 constructor">
             @if (Model.PlayerSelection.Constructors.Count > 0)
             {
-                @Html.Partial("Constructor", Model.PlayerSelection.Constructors[0])
+                @Html.Partial("ConstructorEdit", Model.PlayerSelection.Constructors[0])
             }
             else
             {
-                @Html.Partial("Constructor", new Constructor())
+                @Html.Partial("ConstructorEdit", new Constructor())
             }
             @Html.DropDownListFor(m => m.PlayerSelection.Constructor1Id, new SelectList(Model.Constructors, "ConstructorId", "NameCost", Model.PlayerSelection.Constructor1Id), "Select", new { @class = "form-control ConstructorSelection" })
         </div>
         <div class="col-md-3 constructor">
             @if (Model.PlayerSelection.Constructors.Count > 1)
             {
-                @Html.Partial("Constructor", Model.PlayerSelection.Constructors[1])
+                @Html.Partial("ConstructorEdit", Model.PlayerSelection.Constructors[1])
             }
             else
             {
-                @Html.Partial("Constructor", new Constructor())
+                @Html.Partial("ConstructorEdit", new Constructor())
             }
             @Html.DropDownListFor(m => m.PlayerSelection.Constructor2Id, new SelectList(Model.Constructors, "ConstructorId", "NameCost", Model.PlayerSelection.Constructor2Id), "Select", new { @class = "form-control ConstructorSelection" })
 
@@ -130,22 +130,22 @@
         <div class="col-md-3 engine">
             @if (Model.PlayerSelection.Engines.Count > 0)
             {
-                @Html.Partial("Engine", Model.PlayerSelection.Engines[0])
+                @Html.Partial("EngineEdit", Model.PlayerSelection.Engines[0])
             }
             else
             {
-                @Html.Partial("Engine", new Engine())
+                @Html.Partial("EngineEdit", new Engine())
             }
             @Html.DropDownListFor(m => m.PlayerSelection.Engine1Id, new SelectList(Model.Engines, "EngineId", "NameCost", Model.PlayerSelection.Engine1Id), "Select", new { @class = "form-control EngineSelection" })
         </div>
         <div class="col-md-3 engine">
             @if (Model.PlayerSelection.Engines.Count > 1)
             {
-                @Html.Partial("Engine", Model.PlayerSelection.Engines[1])
+                @Html.Partial("EngineEdit", Model.PlayerSelection.Engines[1])
             }
             else
             {
-                @Html.Partial("Engine", new Engine())
+                @Html.Partial("EngineEdit", new Engine())
             }
             @Html.DropDownListFor(m => m.PlayerSelection.Engine2Id, new SelectList(Model.Engines, "EngineId", "NameCost", Model.PlayerSelection.Engine2Id), "Select", new { @class = "form-control EngineSelection" })
         </div>
@@ -155,7 +155,7 @@
 
         <div class="Question col-md-4">
             <div class="pull-right label label-warning">
-                <h4 class="Points">10</h4> Pts
+                <h4 class="Points">@Model.Questions[0].Points</h4> Pts
             </div>
             <h4>@Html.DisplayFor(model => model.Questions[0].QuestionText)</h4>
             <div class="thumbnail">
@@ -177,7 +177,7 @@
 
         <div class="Question col-md-4">
             <div class="pull-right label label-warning">
-                <h4 class="Points">10</h4> Pts
+                <h4 class="Points">@Model.Questions[0].Points</h4> Pts
             </div>
             <h4>@Html.DisplayFor(model => model.Questions[1].QuestionText)</h4>
             <div class="thumbnail">
@@ -199,7 +199,7 @@
 
         <div class="Question col-md-4">
             <div class="pull-right label label-warning">
-                <h4 class="Points">10</h4> Pts
+                <h4 class="Points">@Model.Questions[0].Points</h4> Pts
             </div>
             <h4>@Html.DisplayFor(model => model.Questions[2].QuestionText)</h4>
             <div class="thumbnail">

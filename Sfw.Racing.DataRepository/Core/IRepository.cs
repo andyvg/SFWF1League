@@ -24,8 +24,12 @@ namespace Sfw.Racing.DataRepository.Core
         Player GetPlayerByTeamName(string TeamName);
         DateTime GetFinalEntryTime();
         IList<RaceResult> GetRaceResults();
-        Response<IList<RaceResult>> CreateRaceResults(IList<RaceResult> results);
+        Response<IList<RaceResult>> CreateRaceResults(IList<RaceResult> results, int FastestLapDriverId);
         Player GetPlayerById(int PlayerId);
         Response<Player> CreatePlayerLeague(int PlayerId, int LeagueId);
+        IList<DriverPoints> GetDriverPointsBySelectionId(int SelectionId);
+        IList<EnginePoints> GetEnginePointsBySelectionId(int SelectionId);
+        IList<ConstructorPoints> GetConstructorPointsBySelectionId(int SelectionId);
+        IList<QuestionPoints> GetQuestionPointsBySelectionId(int SelectionId);
     }
 }

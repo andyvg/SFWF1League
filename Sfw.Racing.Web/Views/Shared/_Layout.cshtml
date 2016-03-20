@@ -24,7 +24,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Rules", "About", "Home")</li>
                     <li>@Html.ActionLink("Your Team", "Edit", "Player")</li>
-                    <li>@Html.ActionLink("View Teams", "Index", "Player")</li>
+                    <li>@Html.ActionLink("League Table", "Index", "Player")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -42,6 +42,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/Site")
+    @Scripts.Render("~/bundles/tablesorter")
     @RenderSection("scripts", required: false)
 </body>
 </html>

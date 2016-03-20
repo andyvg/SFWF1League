@@ -1,4 +1,5 @@
 ﻿@using Sfw.Racing.DataRepository.Model
+@using Sfw.Racing.Web.ViewModel
 @model Sfw.Racing.Web.ViewModel.PlayerSelectionViewModel
 
 @{
@@ -19,6 +20,7 @@
     
     <h2>@Html.DisplayFor(model => model.PlayerSelection.TeamName)</h2>
     <h3><span class="Budget label label-success">Budget: <span class="TotalCost">@Model.PlayerSelection.BudgetSpent.ToString("0.##")</span> / <span class="MaxBudget">@Html.DisplayFor(model => model.PlayerSelection.MaxBudget)</span>m</span></h3>
+    <h3><span class="label label-warning">Score: @Model.TotalScore points</span></h3>
     <div class="clearfix visible-xs-block"></div>
     <hr />
 
@@ -29,11 +31,11 @@
 
             @if (Model.PlayerSelection.Drivers.Count > 0)
             {
-                @Html.Partial("Driver", Model.PlayerSelection.Drivers[0])
+                @Html.Partial("DriverDetail", new DriverScoreViewModel() { Driver = Model.PlayerSelection.Drivers[0], DriverPoints = Model.DriverPoints.Where(p => p.DriverId == Model.PlayerSelection.Drivers[0].DriverId).FirstOrDefault() });
             }
             else
             {
-                @Html.Partial("Driver", new Driver())
+                @Html.Partial("DriverDetail", new DriverScoreViewModel())
             }
             
 
@@ -43,11 +45,11 @@
 
             @if (Model.PlayerSelection.Drivers.Count > 1)
             {
-                @Html.Partial("Driver", Model.PlayerSelection.Drivers[1])
+                @Html.Partial("DriverDetail", new DriverScoreViewModel() { Driver = Model.PlayerSelection.Drivers[1], DriverPoints = Model.DriverPoints.Where(p => p.DriverId == Model.PlayerSelection.Drivers[1].DriverId).FirstOrDefault() });
             }
             else
             {
-                @Html.Partial("Driver", new Driver())
+                @Html.Partial("DriverDetail", new DriverScoreViewModel())
             }
             
         </div>
@@ -56,11 +58,11 @@
 
             @if (Model.PlayerSelection.Drivers.Count > 2)
             {
-                @Html.Partial("Driver", Model.PlayerSelection.Drivers[2])
+                @Html.Partial("DriverDetail", new DriverScoreViewModel() { Driver = Model.PlayerSelection.Drivers[2], DriverPoints = Model.DriverPoints.Where(p => p.DriverId == Model.PlayerSelection.Drivers[2].DriverId).FirstOrDefault() });
             }
             else
             {
-                @Html.Partial("Driver", new Driver())
+                @Html.Partial("DriverDetail", new DriverScoreViewModel())
             }
             
         </div>
@@ -68,11 +70,11 @@
         <div class="col-md-3 driver">
             @if (Model.PlayerSelection.Drivers.Count > 3)
             {
-                @Html.Partial("Driver", Model.PlayerSelection.Drivers[3])
+                @Html.Partial("DriverDetail", new DriverScoreViewModel() { Driver = Model.PlayerSelection.Drivers[3], DriverPoints = Model.DriverPoints.Where(p => p.DriverId == Model.PlayerSelection.Drivers[3].DriverId).FirstOrDefault() });
             }
             else
             {
-                @Html.Partial("Driver", new Driver())
+                @Html.Partial("DriverDetail", new DriverScoreViewModel())
             }
 
             
@@ -89,22 +91,22 @@
         <div class="col-md-3 constructor">
             @if (Model.PlayerSelection.Constructors.Count > 0)
             {
-                @Html.Partial("Constructor", Model.PlayerSelection.Constructors[0])
+                @Html.Partial("ConstructorDetail", new ConstructorScoreViewModel() { Constructor = Model.PlayerSelection.Constructors[0], ConstructorPoints = Model.ConstructorPoints.Where(p => p.ConstructorId == Model.PlayerSelection.Constructors[0].ConstructorId).FirstOrDefault() });
             }
             else
             {
-                @Html.Partial("Constructor", new Constructor())
+                @Html.Partial("ConstructorDetail", new ConstructorScoreViewModel())
             }
             
         </div>
         <div class="col-md-3 constructor">
             @if (Model.PlayerSelection.Constructors.Count > 1)
             {
-                @Html.Partial("Constructor", Model.PlayerSelection.Constructors[1])
+                @Html.Partial("ConstructorDetail", new ConstructorScoreViewModel() { Constructor = Model.PlayerSelection.Constructors[1], ConstructorPoints = Model.ConstructorPoints.Where(p => p.ConstructorId == Model.PlayerSelection.Constructors[1].ConstructorId).FirstOrDefault() });
             }
             else
             {
-                @Html.Partial("Constructor", new Constructor())
+                @Html.Partial("ConstructorDetail", new ConstructorScoreViewModel())
             }
             
 
@@ -112,22 +114,22 @@
         <div class="col-md-3 engine">
             @if (Model.PlayerSelection.Engines.Count > 0)
             {
-                @Html.Partial("Engine", Model.PlayerSelection.Engines[0])
+                @Html.Partial("EngineDetail", new EngineScoreViewModel() { Engine = Model.PlayerSelection.Engines[0], EnginePoints = Model.EnginePoints.Where(p => p.EngineId == Model.PlayerSelection.Engines[0].EngineId).FirstOrDefault() });
             }
             else
             {
-                @Html.Partial("Engine", new Engine())
+                @Html.Partial("EngineDetail", new EngineScoreViewModel())
             }
             
         </div>
         <div class="col-md-3 engine">
             @if (Model.PlayerSelection.Engines.Count > 1)
             {
-                @Html.Partial("Engine", Model.PlayerSelection.Engines[1])
+                @Html.Partial("EngineDetail", new EngineScoreViewModel() { Engine = Model.PlayerSelection.Engines[1], EnginePoints = Model.EnginePoints.Where(p => p.EngineId == Model.PlayerSelection.Engines[1].EngineId).FirstOrDefault() });
             }
             else
             {
-                @Html.Partial("Engine", new Engine())
+                @Html.Partial("EngineDetail", new EngineScoreViewModel())
             }
             
         </div>
@@ -137,7 +139,7 @@
 
         <div class="Question col-md-4">
             <div class="pull-right label label-warning">
-                <h4 class="Points">10</h4> Pts
+                <h4 class="Points">@Model.QuestionPoints.Where(q => q.QuestionId == Model.Questions[0].QuestionId).Select(p => p.Points).Sum()</h4> Pts
             </div>
             <h4>@Html.DisplayFor(model => model.Questions[0].QuestionText)</h4>
             <div class="thumbnail">
@@ -159,7 +161,7 @@
 
         <div class="Question col-md-4">
             <div class="pull-right label label-warning">
-                <h4 class="Points">10</h4> Pts
+                <h4 class="Points">@Model.QuestionPoints.Where(q => q.QuestionId == Model.Questions[1].QuestionId).Select(p => p.Points).Sum()</h4> Pts
             </div>
             <h4>@Html.DisplayFor(model => model.Questions[1].QuestionText)</h4>
             <div class="thumbnail">
@@ -181,7 +183,7 @@
 
         <div class="Question col-md-4">
             <div class="pull-right label label-warning">
-                <h4 class="Points">10</h4> Pts
+                <h4 class="Points">@Model.QuestionPoints.Where(q => q.QuestionId == Model.Questions[2].QuestionId).Select(p => p.Points).Sum()</h4> Pts
             </div>
             <h4>@Html.DisplayFor(model => model.Questions[2].QuestionText)</h4>
             <div class="thumbnail">
@@ -201,7 +203,5 @@
             </div>
         </div>
     </div>
-
-    <hr />
     
 </div>
