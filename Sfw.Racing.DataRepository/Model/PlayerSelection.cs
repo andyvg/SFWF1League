@@ -50,6 +50,31 @@ namespace Sfw.Racing.DataRepository.Model
         public DateTime FinalEntry { get; set; }
         public string PlayerName { get; set; }
         public string TeamName { get; set; }
+        public int RaceId { get; set; }
+        public int MaxChangesAllowed { get; set; }
+        public int MinRaceId { get; set; }
+        public int MaxRaceId { get; set; }
+        public int? NextRaceId {
+            get
+            {
+                if(RaceId >= MaxRaceId)
+                {
+                    return null;
+                }
+                return RaceId + 1;
+            }
+        }
+        public int? PrevRaceId
+        {
+            get
+            {
+                if (RaceId <= MinRaceId)
+                {
+                    return null;
+                }
+                return RaceId - 1;
+            }
+        }
 
         [Required(ErrorMessage = "You must answer the first question")]
         public int Answer1Id { get; set; }

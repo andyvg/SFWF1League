@@ -4,9 +4,12 @@
     <div class="pull-right label label-success">
         <h4 class="Cost">@Model.Constructor.Cost.ToString("0.##")</h4> million
     </div>
+    @if (Model.ConstructorPoints != null)
+    {
     <div class="pull-right label label-warning">
         <h4 class="Cost">@Model.ConstructorPoints.TotalPoints.ToString("0")</h4> points
     </div>
+    }
     <h4 class="ConstructorName">@Html.DisplayFor(model => model.Constructor.Name)&nbsp;</h4>
     <div>
         @Html.HiddenFor(model => model.Constructor.ConstructorId)

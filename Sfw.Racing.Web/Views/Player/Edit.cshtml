@@ -16,7 +16,27 @@
         </div>
     
     </div>
-    
+    @if (Model.PreviousPlayerSelection != null)
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setComponents([
+                "D" + "@Model.PreviousPlayerSelection.Driver1Id",
+                "D" + "@Model.PreviousPlayerSelection.Driver2Id",
+                "D" + "@Model.PreviousPlayerSelection.Driver3Id",
+                "D" + "@Model.PreviousPlayerSelection.Driver4Id",
+                "C" + "@Model.PreviousPlayerSelection.Constructor1Id",
+                "C" + "@Model.PreviousPlayerSelection.Constructor2Id",
+                "E" + "@Model.PreviousPlayerSelection.Engine1Id",
+                "E" + "@Model.PreviousPlayerSelection.Engine2Id"]);
+
+            setMaxChangesAllowed(@Model.PlayerSelection.MaxChangesAllowed);
+
+        });
+
+    </script>
+    }
+
     <h2>@Html.DisplayFor(model => model.PlayerSelection.TeamName)</h2>
     <h3><span class="Budget label label-success">Budget: <span class="TotalCost">@Model.PlayerSelection.BudgetSpent.ToString("0.##")</span> / <span class="MaxBudget">@Html.DisplayFor(model => model.PlayerSelection.MaxBudget)</span>m</span></h3>
     @if (Model.PlayerSelection.FinalEntry < DateTime.Now)
@@ -24,6 +44,19 @@
         <span class="label label-danger">Race entries are closed.</span>
     }
     <div class="clearfix visible-xs-block"></div>
+    <div class="row">
+
+        @if (Model.PlayerSelection.PrevRaceId.HasValue)
+        {
+            <div class="col-md-2 pull-right text-right">
+                @Html.ActionLink("Previous Race", Mvc.Player.Actions.RaceDetail(Model.PlayerSelection.TeamName, Model.PlayerSelection.PrevRaceId.Value))
+            </div>
+        }
+    </div>
+    <div>
+        <h4 class="row maxChangesAllowed text-center"><span class="label"></span></h4>
+    </div>
+
     <hr />
     @using (Html.BeginForm(Mvc.Player.Actions.Edit()))
     {
@@ -34,6 +67,8 @@
         @Html.HiddenFor(model => model.PlayerSelection.RaceDate)
         @Html.HiddenFor(model => model.PlayerSelection.MaxBudget)
         @Html.HiddenFor(model => model.PlayerSelection.FinalEntry)
+        @Html.HiddenFor(model => model.PlayerSelection.MaxChangesAllowed)
+
     <h3>Drivers</h3>
     <div class="dl-horizontal row">
         @Html.HiddenFor(model => model.PlayerSelection.SelectionId)
@@ -227,7 +262,10 @@
             <span class="label label-danger">Race entries are closed. You cannot make any further changes to your team.</span>
         }
         else {
-            <input type="submit" value="Save Team" class="btn btn-primary btn-lg" />
+            <div>
+                <h4 class="row maxChangesAllowed"><span class="label"></span></h4>
+            </div>
+            <input type="submit" value="Save Team" class="btn btn-primary btn-lg saveBtn" />
         }
     </div>
     }

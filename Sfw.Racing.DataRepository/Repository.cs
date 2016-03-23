@@ -147,6 +147,23 @@ namespace Sfw.Racing.DataRepository
             return questions;
         }
 
+        public IList<Question> GetQuestions(int RaceId)
+        {
+            IList<Question> questions = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+
+                var query = conn.Query("GetQuestions", new { RaceId = RaceId },
+                    Query.Returns(Some<Question>.Records)
+                        .ThenChildren(Some<Answer>.Records));
+
+                questions = query;
+            }
+
+            return questions;
+        }
+
         public Response<PlayerSelection> UpdatePlayerSelection(int PlayerId, int Driver1Id, int Driver2Id, int Driver3Id, int Driver4Id, int Constructor1Id, int Constructor2Id, int Engine1Id, int Engine2Id, int Answer1Id, int Answer2Id, int Answer3Id)
         {
             Response<PlayerSelection> response = new Response<PlayerSelection>() { Success = false };
@@ -163,6 +180,11 @@ namespace Sfw.Racing.DataRepository
                     {
                         response.Message = "Could not save. You have exceeded your budget.";
                         response.Status = StatusCode.Error_Budget_Exceeded;
+                    }
+                    else if (e.Message.Contains("CHANGES_ERROR"))
+                    {
+                        response.Message = "Could not save. You have made too many changes to your team.";
+                        response.Status = StatusCode.Error_Too_Many_Changes;
                     }
                     else
                     {
@@ -357,6 +379,38 @@ namespace Sfw.Racing.DataRepository
             }
 
             return points;
+        }
+
+        public PlayerSelection GetPlayerSelection(int PlayerId, int RaceId)
+        {
+            PlayerSelection playerSelection = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+
+                var query = conn.Query("GetPlayerSelectionByPlayerId", new { PlayerId = PlayerId, RaceId = RaceId },
+                    Query.Returns(Some<PlayerSelection>.Records)
+                        .ThenChildren(Some<Driver>.Records)
+                        .ThenChildren(Some<Constructor>.Records)
+                        .ThenChildren(Some<Engine>.Records));
+
+                playerSelection = query[0];
+            }
+
+            return playerSelection;
+        }
+
+        public CurrentRace GetCurrentRace()
+        {
+            CurrentRace Race;
+
+            using (IDbConnection conn = factory.Create())
+            {
+
+                Race = conn.Query<CurrentRace>("GetCurrentRaceId").FirstOrDefault();
+            }
+
+            return Race;
         }
     }
 }

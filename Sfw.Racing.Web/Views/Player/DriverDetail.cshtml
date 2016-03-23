@@ -4,9 +4,12 @@
     <div class="pull-right label label-success">
         <h4 class="Cost">@Model.Driver.Cost.ToString("0.##")</h4> million
     </div>
+    @if (Model.DriverPoints != null)
+    {
     <div class="pull-right label label-warning">
         <h4 class="Cost">@Model.DriverPoints.TotalPoints.ToString("0")</h4> points
     </div>
+    }
     <h4 class="DriverName">@Html.DisplayFor(model => model.Driver.Name)&nbsp;</h4>
     <div class="DriverConstructor">
         @Model.Driver.ConstructorName

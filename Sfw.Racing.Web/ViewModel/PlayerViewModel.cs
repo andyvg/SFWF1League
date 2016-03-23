@@ -11,12 +11,23 @@ namespace Sfw.Racing.Web.ViewModel
     {
         [Display(Name = "Team Name")]
         public string TeamName { get; set; }
-        [Display(Name="Player Name")]
+        [Display(Name="Player")]
         public string Name { get; set; }
+        [Display(Name="Total Points")]
         public int Points { get; set; }
+        [Display(Name="Pos")]
+        public int Position { get; set; }
         [Display(Name = "Budget Spent")]
         [DisplayFormat(DataFormatString ="{0:0.##}")]
         public decimal BudgetSpent { get; set; }
+        [Display(Name = "Drivers Pts")]
+        public int DriverPoints { get; set; }
+        [Display(Name = "Engine Pts")]
+        public int EnginePoints { get; set; }
+        [Display(Name = "Constructor Pts")]
+        public int ConstructorPoints { get; set; }
+        [Display(Name = "Question Pts")]
+        public int QuestionPoints { get; set; }
 
         public PlayerViewModel(Player player)
         {
@@ -24,6 +35,11 @@ namespace Sfw.Racing.Web.ViewModel
             this.Name = player.Name;
             this.Points = player.Points;
             this.BudgetSpent = player.BudgetSpent;
+            this.Position = player.Position;
+            this.DriverPoints = player.DriverPoints;
+            this.EnginePoints = player.EnginePoints;
+            this.ConstructorPoints = player.ConstructorPoints;
+            this.QuestionPoints = player.QuestionPoints;
         }
 
         public static List<PlayerViewModel> Create(IList<Player> players)

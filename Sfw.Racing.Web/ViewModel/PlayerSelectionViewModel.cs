@@ -12,6 +12,7 @@ namespace Sfw.Racing.Web.ViewModel
     {
         //TODO replace with ViewModels
         public PlayerSelection PlayerSelection { get; set; }
+        public PlayerSelection PreviousPlayerSelection { get; set; }
 
         public IList<Driver> Drivers { get; set; }
         public IList<Constructor> Constructors { get; set; }
@@ -27,7 +28,11 @@ namespace Sfw.Racing.Web.ViewModel
         {
             get
             {
-                return DriverPoints.Sum(p => p.TotalPoints) + ConstructorPoints.Sum(p => p.TotalPoints) + EnginePoints.Sum(p => p.TotalPoints) + QuestionPoints.Sum(p => p.Points);
+                if (DriverPoints != null && ConstructorPoints != null && EnginePoints != null && QuestionPoints != null)
+                {
+                    return DriverPoints.Sum(p => p.TotalPoints) + ConstructorPoints.Sum(p => p.TotalPoints) + EnginePoints.Sum(p => p.TotalPoints) + QuestionPoints.Sum(p => p.Points);
+                }
+                return 0;
             }
         }
 

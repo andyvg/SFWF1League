@@ -46,6 +46,8 @@ $(document).ready(function () {
                     updateDriverSelectionDropDown();
 
                     updateCost();
+
+                    checkMaxChanges();
                 }
             },
             error: function (xhr) {
@@ -83,6 +85,8 @@ $(document).ready(function () {
                     updateEngineSelectionDropDown();
 
                     updateCost();
+
+                    checkMaxChanges();
                 }
             },
             error: function (xhr) {
@@ -120,6 +124,8 @@ $(document).ready(function () {
                     updateConstructorSelectionDropDown();
 
                     updateCost();
+
+                    checkMaxChanges();
                 }
             },
             error: function (xhr) {
@@ -138,6 +144,8 @@ $(document).ready(function () {
     updateEngineSelectionDropDown();
 
     updateConstructorSelectionDropDown();
+
+    setTimeout("checkMaxChanges()", 100);
 });
 
 function updateDriverSelectionDropDown() {
@@ -192,4 +200,49 @@ function updateCost() {
         $(".Budget").removeClass("label-danger");
         $(".Budget").addClass("label-success");
     }
+}
+
+var components = [];
+
+function setComponents(selectedComponents) {
+    components = selectedComponents;
+}
+
+var maxChangesAllowed;
+
+function setMaxChangesAllowed(changesAllowed) {
+    maxChangesAllowed = changesAllowed;
+}
+
+function checkMaxChanges() {
+    if (components !== undefined && components.length > 0) {
+
+        var checkComponents = components.slice(0); //clone array
+
+        $(".DriverSelection").each(function () {
+            checkComponents.push("D"+$(this).val());
+        });
+        $(".ConstructorSelection").each(function () {
+            checkComponents.push("C"+$(this).val());
+        });
+        $(".EngineSelection").each(function () {
+            checkComponents.push("E"+$(this).val());
+        });
+
+        var uniqueComponents = checkComponents.filter(onlyUnique);
+
+        if (uniqueComponents.length - 8 > maxChangesAllowed) {
+            //$(".maxChangesAllowed").removeClass("alert-success").addClass("alert-danger");
+            $(".maxChangesAllowed span").removeClass("label-success").addClass("label-danger").text("You've made " + (uniqueComponents.length - 8) + " out of your allowed " + maxChangesAllowed + " changes");
+            $(".saveBtn").hide();
+        } else {
+            //$(".maxChangesAllowed").removeClass("alert-danger").addClass("alert-success");
+            $(".maxChangesAllowed span").removeClass("label-danger").addClass("label-success").text("You've made " + (uniqueComponents.length - 8) + " out of a possible " + maxChangesAllowed + " changes");
+            $(".saveBtn").show();
+        }
+    }
+}
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
 }

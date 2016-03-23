@@ -15,13 +15,31 @@
         <div class="text-right">
             <h3>@String.Format("{0:dd/MM/yyyy}", Model.PlayerSelection.RaceDate)</h3>
         </div>
-    
     </div>
     
     <h2>@Html.DisplayFor(model => model.PlayerSelection.TeamName)</h2>
     <h3><span class="Budget label label-success">Budget: <span class="TotalCost">@Model.PlayerSelection.BudgetSpent.ToString("0.##")</span> / <span class="MaxBudget">@Html.DisplayFor(model => model.PlayerSelection.MaxBudget)</span>m</span></h3>
+    @if (@Model.TotalScore > 0)
+    {
     <h3><span class="label label-warning">Score: @Model.TotalScore points</span></h3>
+    }
     <div class="clearfix visible-xs-block"></div>
+
+    <div class="row">
+        
+        @if (Model.PlayerSelection.PrevRaceId.HasValue)
+        {
+            <div class="col-md-2 pull-right text-right">
+                @Html.ActionLink("Previous Race", Mvc.Player.Actions.RaceDetail(Model.PlayerSelection.TeamName, Model.PlayerSelection.PrevRaceId.Value))
+            </div>
+        }
+        @if (Model.PlayerSelection.NextRaceId.HasValue)
+        {
+            <div class="col-md-2 pull-right text-right">
+                @Html.ActionLink("Next Race", Mvc.Player.Actions.RaceDetail(Model.PlayerSelection.TeamName, Model.PlayerSelection.NextRaceId.Value))
+            </div>
+            }
+        </div>
     <hr />
 
     <h3>Drivers</h3>

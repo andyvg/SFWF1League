@@ -27,18 +27,41 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Players[0].Position)
+                <small><span class="glyphicon glyphicon-sort"></span></small>
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Players[0].TeamName)
+                <small><span class="glyphicon glyphicon-sort"></span></small>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Players[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Players[0].Points)
+                <small><span class="glyphicon glyphicon-sort"></span></small>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Players[0].BudgetSpent)
+                <small><span class="glyphicon glyphicon-sort"></span></small>
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Players[0].DriverPoints)
+                <small><span class="glyphicon glyphicon-sort"></span></small>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Players[0].ConstructorPoints)
+                <small><span class="glyphicon glyphicon-sort"></span></small>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Players[0].EnginePoints)
+                <small><span class="glyphicon glyphicon-sort"></span></small>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Players[0].QuestionPoints)
+                <small><span class="glyphicon glyphicon-sort"></span></small>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Players[0].Points)
+                <small><span class="glyphicon glyphicon-sort"></span></small>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -46,16 +69,31 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
                     @Html.ActionLink(item.TeamName, Mvc.Player.Detail(item.TeamName))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Points)
+                    @Html.DisplayFor(modelItem => item.BudgetSpent)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BudgetSpent)
+                    @Html.DisplayFor(modelItem => item.DriverPoints)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConstructorPoints)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnginePoints)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionPoints)
+                </td>
+                <td>
+                    <b>@Html.DisplayFor(modelItem => item.Points)</b>
                 </td>
             </tr>
         }

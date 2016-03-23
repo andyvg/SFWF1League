@@ -69,6 +69,7 @@
     <Compile Include="Model\Constructor.cs" />
     <Compile Include="Model\Answer.cs" />
     <Compile Include="Model\ConstructorPoints.cs" />
+    <Compile Include="Model\CurrentRace.cs" />
     <Compile Include="Model\DriverPoints.cs" />
     <Compile Include="Model\EnginePoints.cs" />
     <Compile Include="Model\League.cs" />

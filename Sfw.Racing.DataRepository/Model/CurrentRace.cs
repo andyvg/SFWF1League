@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Sfw.Racing.DataRepository.Model
 {
-    public enum StatusCode
+    public class CurrentRace
     {
-        Success = 0,
-        Error_Unknown = -1,
-        Error_Budget_Exceeded = -2,
-        Error_Too_Many_Changes = -3
+        public int CurrentRaceId { get; set; }
+        public int? PrevRaceId { get; set; }
+        public int? NextRaceId { get; set; }
     }
 }

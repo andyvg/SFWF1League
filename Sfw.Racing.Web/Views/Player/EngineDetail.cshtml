@@ -4,9 +4,12 @@
     <div class="pull-right label label-success">
         <h4 class="Cost">@Model.Engine.Cost.ToString("0.##")</h4> million
     </div>
+    @if (Model.EnginePoints != null)
+    {
     <div class="pull-right label label-warning">
         <h4 class="Cost">@Model.EnginePoints.TotalPoints.ToString("0")</h4> points
     </div>
+    }
     <h4 class="EngineName">@Html.DisplayFor(model => model.Engine.Name)&nbsp;</h4>
     <div>
         @Html.HiddenFor(model => model.Engine.EngineId)

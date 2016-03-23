@@ -81,3 +81,8 @@ a{
 a:visited{
     color:springgreen !important;
 }
+
+th
+{
+    cursor:pointer;
+}

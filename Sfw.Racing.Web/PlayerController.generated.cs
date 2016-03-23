@@ -69,6 +69,13 @@ namespace Sfw.Racing.Web.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Detail);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> RaceDetail()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RaceDetail);
+            return System.Threading.Tasks.Task.FromResult(callInfo as System.Web.Mvc.ActionResult);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public PlayerController Actions { get { return Mvc.Player; } }
@@ -87,6 +94,7 @@ namespace Sfw.Racing.Web.Controllers
         {
             public readonly string Index = "Index";
             public readonly string Detail = "Detail";
+            public readonly string RaceDetail = "RaceDetail";
             public readonly string Edit = "Edit";
         }
 
@@ -95,6 +103,7 @@ namespace Sfw.Racing.Web.Controllers
         {
             public const string Index = "Index";
             public const string Detail = "Detail";
+            public const string RaceDetail = "RaceDetail";
             public const string Edit = "Edit";
         }
 
@@ -115,6 +124,15 @@ namespace Sfw.Racing.Web.Controllers
         {
             public readonly string TeamName = "TeamName";
         }
+        static readonly ActionParamsClass_RaceDetail s_params_RaceDetail = new ActionParamsClass_RaceDetail();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_RaceDetail RaceDetailParams { get { return s_params_RaceDetail; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_RaceDetail
+        {
+            public readonly string TeamName = "TeamName";
+            public readonly string RaceId = "RaceId";
+        }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
@@ -133,18 +151,24 @@ namespace Sfw.Racing.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Constructor = "Constructor";
+                public readonly string ConstructorDetail = "ConstructorDetail";
+                public readonly string ConstructorEdit = "ConstructorEdit";
                 public readonly string Detail = "Detail";
-                public readonly string Driver = "Driver";
+                public readonly string DriverDetail = "DriverDetail";
+                public readonly string DriverEdit = "DriverEdit";
                 public readonly string Edit = "Edit";
-                public readonly string Engine = "Engine";
+                public readonly string EngineDetail = "EngineDetail";
+                public readonly string EngineEdit = "EngineEdit";
                 public readonly string Index = "Index";
             }
-            public readonly string Constructor = "~/Views/Player/Constructor.cshtml";
+            public readonly string ConstructorDetail = "~/Views/Player/ConstructorDetail.cshtml";
+            public readonly string ConstructorEdit = "~/Views/Player/ConstructorEdit.cshtml";
             public readonly string Detail = "~/Views/Player/Detail.cshtml";
-            public readonly string Driver = "~/Views/Player/Driver.cshtml";
+            public readonly string DriverDetail = "~/Views/Player/DriverDetail.cshtml";
+            public readonly string DriverEdit = "~/Views/Player/DriverEdit.cshtml";
             public readonly string Edit = "~/Views/Player/Edit.cshtml";
-            public readonly string Engine = "~/Views/Player/Engine.cshtml";
+            public readonly string EngineDetail = "~/Views/Player/EngineDetail.cshtml";
+            public readonly string EngineEdit = "~/Views/Player/EngineEdit.cshtml";
             public readonly string Index = "~/Views/Player/Index.cshtml";
         }
     }
@@ -176,6 +200,19 @@ namespace Sfw.Racing.Web.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "TeamName", TeamName);
             DetailOverride(callInfo, TeamName);
             return callInfo;
+        }
+
+        [NonAction]
+        partial void RaceDetailOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string TeamName, int RaceId);
+
+        [NonAction]
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> RaceDetail(string TeamName, int RaceId)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RaceDetail);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "TeamName", TeamName);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "RaceId", RaceId);
+            RaceDetailOverride(callInfo, TeamName, RaceId);
+            return System.Threading.Tasks.Task.FromResult(callInfo as System.Web.Mvc.ActionResult);
         }
 
         [NonAction]

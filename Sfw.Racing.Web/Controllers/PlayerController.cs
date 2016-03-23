@@ -57,10 +57,18 @@ namespace Sfw.Racing.Web.Controllers
         {
             var player = repository.GetPlayerByTeamName(TeamName);
 
+            var currentRace = repository.GetCurrentRace();
+            int RaceId = currentRace.CurrentRaceId;
+
+            if (currentRace.PrevRaceId.HasValue)
+            {
+                RaceId = currentRace.PrevRaceId.Value;
+            }
+
             PlayerSelectionViewModel model = new PlayerSelectionViewModel()
             {
-                PlayerSelection = repository.GetPlayerSelection(player.PlayerId),
-                Questions = repository.GetQuestions(),
+                PlayerSelection = repository.GetPlayerSelection(player.PlayerId, RaceId),
+                Questions = repository.GetQuestions(RaceId),
             };
 
             model.DriverPoints = repository.GetDriverPointsBySelectionId(model.PlayerSelection.SelectionId);
@@ -71,18 +79,56 @@ namespace Sfw.Racing.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public virtual async Task<ActionResult> RaceDetail(string TeamName, int RaceId)
+        {
+            var player = repository.GetPlayerByTeamName(TeamName);
+
+            int currentPlayerId = await CurrentPlayerId();
+
+            if (player.PlayerId == currentPlayerId)
+            {
+                if (RaceId == repository.GetCurrentRace().CurrentRaceId)
+                {
+                    return RedirectToAction(Mvc.Player.Edit());
+                }
+            }
+
+            PlayerSelectionViewModel model = new PlayerSelectionViewModel()
+            {
+                PlayerSelection = repository.GetPlayerSelection(player.PlayerId, RaceId),
+                Questions = repository.GetQuestions(RaceId),
+            };
+
+            model.DriverPoints = repository.GetDriverPointsBySelectionId(model.PlayerSelection.SelectionId);
+            model.ConstructorPoints = repository.GetConstructorPointsBySelectionId(model.PlayerSelection.SelectionId);
+            model.EnginePoints = repository.GetEnginePointsBySelectionId(model.PlayerSelection.SelectionId);
+            model.QuestionPoints = repository.GetQuestionPointsBySelectionId(model.PlayerSelection.SelectionId);
+
+            return View(Mvc.Player.Views.ViewNames.Detail, model);
+        }
+
         // GET: Player
         [HttpGet]
         public virtual async Task<ActionResult> Edit()
         {
+            int PlayerId = await CurrentPlayerId();
+
             PlayerSelectionViewModel model = new PlayerSelectionViewModel()
             {
-                PlayerSelection = repository.GetPlayerSelection(await CurrentPlayerId()),
+                PlayerSelection = repository.GetPlayerSelection(PlayerId),
                 Drivers = repository.GetDrivers(),
                 Constructors = repository.GetConstructors(),
                 Engines = repository.GetEngines(),
                 Questions = repository.GetQuestions()
             };
+
+            CurrentRace race = repository.GetCurrentRace();
+
+            if (race.PrevRaceId.HasValue)
+            {
+                model.PreviousPlayerSelection = repository.GetPlayerSelection(PlayerId, race.PrevRaceId.Value);
+            }
 
             return View(model);
         }
@@ -94,8 +140,9 @@ namespace Sfw.Racing.Web.Controllers
             {
                 if (repository.GetFinalEntryTime() >= DateTime.Now)
                 {
+                    int PlayerId = await CurrentPlayerId();
 
-                    var result = repository.UpdatePlayerSelection(await CurrentPlayerId(), model.PlayerSelection.Driver1Id, model.PlayerSelection.Driver2Id, model.PlayerSelection.Driver3Id, model.PlayerSelection.Driver4Id,
+                    var result = repository.UpdatePlayerSelection(PlayerId, model.PlayerSelection.Driver1Id, model.PlayerSelection.Driver2Id, model.PlayerSelection.Driver3Id, model.PlayerSelection.Driver4Id,
                         model.PlayerSelection.Constructor1Id, model.PlayerSelection.Constructor2Id, model.PlayerSelection.Engine1Id, model.PlayerSelection.Engine2Id, model.PlayerSelection.Answer1Id, model.PlayerSelection.Answer2Id, model.PlayerSelection.Answer3Id);
 
                     model = new PlayerSelectionViewModel()
@@ -107,6 +154,12 @@ namespace Sfw.Racing.Web.Controllers
                         Questions = repository.GetQuestions()
                     };
 
+                    CurrentRace race = repository.GetCurrentRace();
+
+                    if (race.PrevRaceId.HasValue)
+                    {
+                        model.PreviousPlayerSelection = repository.GetPlayerSelection(PlayerId, race.PrevRaceId.Value);
+                    }
 
                     if (!result.Success)
                     {
