@@ -1,4 +1,8 @@
-﻿
-CREATE PROCEDURE GetQuestions AS SELECT q.* FROM Question q INNER JOIN CurrentRace r ON q.RaceId = r.CurrentRaceId ORDER BY SortOrder
+﻿CREATE PROCEDURE [dbo].[GetQuestions] @RaceId int = null AS
 
-SELECT a.* FROM Answer a INNER JOIN Question q ON a.QuestionId = q.QuestionId INNER JOIN CurrentRace r ON q.RaceId = r.CurrentRaceId ORDER BY QuestionId, SortOrder
+IF(@RaceId IS NULL)
+	SELECT @RaceId = CurrentRaceId FROM CurrentRace;
+
+SELECT q.* FROM Question q WHERE q.RaceId = @RaceId ORDER BY SortOrder
+
+SELECT a.* FROM Answer a INNER JOIN Question q ON a.QuestionId = q.QuestionId WHERE q.RaceId = @RaceId ORDER BY QuestionId, SortOrder

@@ -111,5 +111,8 @@
     <Build Include="dbo\Stored Procedures\GetEnginePointsBySelectionId.sql" />
     <Build Include="dbo\Stored Procedures\GetDriverPointsBySelectionId.sql" />
     <Build Include="dbo\Stored Procedures\GetConstructorPointsBySelectionId.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateNextRace.sql" />
+    <Build Include="dbo\Stored Procedures\GetPlayerChanges.sql" />
+    <Build Include="dbo\Stored Procedures\GetCurrentRaceId.sql" />
   </ItemGroup>
 </Project>
