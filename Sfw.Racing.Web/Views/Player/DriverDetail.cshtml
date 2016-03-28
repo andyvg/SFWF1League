@@ -1,12 +1,12 @@
 ﻿@model Sfw.Racing.Web.ViewModel.DriverScoreViewModel
 
 <div>
-    <div class="pull-right label label-success">
+    <div class="pull-right label-as-badge label label-success">
         <h4 class="Cost">@Model.Driver.Cost.ToString("0.##")</h4> million
     </div>
     @if (Model.DriverPoints != null)
     {
-    <div class="pull-right label label-warning">
+    <div class="pull-right label-as-badge label label-warning">
         <h4 class="Cost">@Model.DriverPoints.TotalPoints.ToString("0")</h4> points
     </div>
     }

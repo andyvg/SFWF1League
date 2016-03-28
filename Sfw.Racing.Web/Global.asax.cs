@@ -40,6 +40,7 @@ namespace Sfw.Racing.Web
 
             container.RegisterType<IConnectionFactory, Sfw.Racing.DataRepository.SqlConnectionFactory>();
             container.RegisterType<IRepository, Sfw.Racing.DataRepository.Repository>();
+            container.RegisterType<ICacheManager, Sfw.Racing.DataRepository.CacheManager>();
 
             return container;
         }

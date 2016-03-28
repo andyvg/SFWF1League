@@ -86,3 +86,19 @@ th
 {
     cursor:pointer;
 }
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: rgba(46, 51, 56, 0.8) !important;
+}
+
+.label-as-badge {
+    border-radius: 1em;
+}
+
+.callout {
+    border-left-color: mediumseagreen;
+    padding:20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-radius: 1em;
+}

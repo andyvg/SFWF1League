@@ -11,6 +11,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Sfw.Racing.Web.Models;
+using SendGrid;
+using System.Net;
+using System.Configuration;
 
 namespace Sfw.Racing.Web
 {
@@ -18,8 +21,31 @@ namespace Sfw.Racing.Web
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var myMessage = new SendGridMessage();
+            myMessage.AddTo(message.Destination);
+            myMessage.From = new System.Net.Mail.MailAddress(
+                                "noreply@sfwf1racing.co.uk", "SFW F1 Fantasy League");
+            myMessage.Subject = message.Subject;
+            myMessage.Text = message.Body;
+            myMessage.Html = message.Body;
+
+            var credentials = new NetworkCredential(
+                       ConfigurationManager.AppSettings["mailAccount"],
+                       ConfigurationManager.AppSettings["mailPassword"]
+                       );
+
+            // Create a Web transport for sending email.
+            var transportWeb = new SendGrid.Web(credentials);
+
+            // Send the email.
+            if (transportWeb != null)
+            {
+                return transportWeb.DeliverAsync(myMessage);
+            }
+            else
+            {
+                return Task.FromResult(0);
+            }
         }
     }
 
@@ -54,10 +80,10 @@ namespace Sfw.Racing.Web
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false
             };
 
             // Configure user lockout defaults

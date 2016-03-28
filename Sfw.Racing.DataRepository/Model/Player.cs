@@ -15,9 +15,10 @@ namespace Sfw.Racing.DataRepository.Model
         {
             get
             {
-                return DriverPoints + EnginePoints + ConstructorPoints + QuestionPoints;
+                return BasePoints + DriverPoints + EnginePoints + ConstructorPoints + QuestionPoints;
             }
         }
+        public int BasePoints { get; set; }
         public int DriverPoints { get; set; }
         public int EnginePoints { get; set; }
         public int ConstructorPoints { get; set; }

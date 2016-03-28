@@ -1,12 +1,12 @@
 ﻿@model Sfw.Racing.Web.ViewModel.EngineScoreViewModel
 
 <div>
-    <div class="pull-right label label-success">
+    <div class="pull-right label-as-badge label label-success">
         <h4 class="Cost">@Model.Engine.Cost.ToString("0.##")</h4> million
     </div>
     @if (Model.EnginePoints != null)
     {
-    <div class="pull-right label label-warning">
+    <div class="pull-right label-as-badge label label-warning">
         <h4 class="Cost">@Model.EnginePoints.TotalPoints.ToString("0")</h4> points
     </div>
     }

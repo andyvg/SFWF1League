@@ -13,14 +13,14 @@ namespace Sfw.Racing.Web.ViewModel
         public string TeamName { get; set; }
         [Display(Name="Player")]
         public string Name { get; set; }
-        [Display(Name="Total Points")]
+        [Display(Name="Total")]
         public int Points { get; set; }
         [Display(Name="Pos")]
         public int Position { get; set; }
         [Display(Name = "Budget Spent")]
         [DisplayFormat(DataFormatString ="{0:0.##}")]
         public decimal BudgetSpent { get; set; }
-        [Display(Name = "Drivers Pts")]
+        [Display(Name = "Driver Pts")]
         public int DriverPoints { get; set; }
         [Display(Name = "Engine Pts")]
         public int EnginePoints { get; set; }

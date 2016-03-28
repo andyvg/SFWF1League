@@ -14,10 +14,12 @@ namespace Sfw.Racing.DataRepository
     public class Repository: IRepository
     {
         private IConnectionFactory factory;
+        private ICacheManager cacheManager;
 
-        public Repository(IConnectionFactory factory)
+        public Repository(IConnectionFactory factory, ICacheManager cacheManager)
         {
             this.factory = factory;
+            this.cacheManager = cacheManager;
         }
 
         public static void Register()
@@ -53,11 +55,16 @@ namespace Sfw.Racing.DataRepository
 
         public IList<Constructor> GetConstructors()
         {
-            IList<Constructor> constructors = null;
+            string cacheKey = "GetConstructorsCache";
+            IList<Constructor> constructors = cacheManager.GetCache<IList<Constructor>>(cacheKey);
 
-            using (IDbConnection conn = factory.Create())
+            if (constructors == null)
             {
-                constructors = conn.Query<Constructor>("GetConstructors");
+                using (IDbConnection conn = factory.Create())
+                {
+                    constructors = conn.Query<Constructor>("GetConstructors");
+                    cacheManager.SetCache<IList<Constructor>>(cacheKey, constructors);
+                }
             }
 
             return constructors;
@@ -77,11 +84,16 @@ namespace Sfw.Racing.DataRepository
 
         public IList<Driver> GetDrivers()
         {
-            IList<Driver> drivers = null;
+            string cacheKey = "GetDriversCache";
+            IList<Driver> drivers = cacheManager.GetCache<IList<Driver>>(cacheKey);
 
-            using (IDbConnection conn = factory.Create())
+            if (drivers == null)
             {
-                drivers = conn.Query<Driver>("GetDrivers");
+                using (IDbConnection conn = factory.Create())
+                {
+                    drivers = conn.Query<Driver>("GetDrivers");
+                    cacheManager.SetCache<IList<Driver>>(cacheKey, drivers);
+                }
             }
 
             return drivers;
@@ -101,11 +113,16 @@ namespace Sfw.Racing.DataRepository
 
         public IList<Engine> GetEngines()
         {
-            IList<Engine> engines = null;
+            string cacheKey = "GetEnginesCache";
+            IList<Engine> engines = cacheManager.GetCache<IList<Engine>>(cacheKey);
 
-            using (IDbConnection conn = factory.Create())
+            if (engines == null)
             {
-                engines = conn.Query<Engine>("GetEngines");
+                using (IDbConnection conn = factory.Create())
+                {
+                    engines = conn.Query<Engine>("GetEngines");
+                    cacheManager.SetCache<IList<Engine>>(cacheKey, engines);
+                }
             }
 
             return engines;

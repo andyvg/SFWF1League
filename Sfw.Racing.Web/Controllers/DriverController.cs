@@ -16,6 +16,7 @@ namespace Sfw.Racing.Web.Controllers
             this.repository = repository;
         }
         // GET: Driver
+        [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam = "DriverId")]
         public virtual JsonResult Driver(int DriverId)
         {
             Driver d = repository.GetDriverById(DriverId);

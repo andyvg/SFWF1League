@@ -1,12 +1,12 @@
 ﻿@model Sfw.Racing.Web.ViewModel.ConstructorScoreViewModel
 
 <div>
-    <div class="pull-right label label-success">
+    <div class="pull-right label-as-badge label label-success">
         <h4 class="Cost">@Model.Constructor.Cost.ToString("0.##")</h4> million
     </div>
     @if (Model.ConstructorPoints != null)
     {
-    <div class="pull-right label label-warning">
+    <div class="pull-right label-as-badge label label-warning">
         <h4 class="Cost">@Model.ConstructorPoints.TotalPoints.ToString("0")</h4> points
     </div>
     }

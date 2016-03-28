@@ -12,7 +12,10 @@
             <h2>@Html.DisplayFor(model => model.PlayerSelection.RaceName)</h2>
         </div>
         <div class="text-right">
-            <h3>@String.Format("{0:dd/MM/yyyy}", Model.PlayerSelection.RaceDate)</h3>
+            <h3>Race: @String.Format("{0:dd/MM/yyyy}", Model.PlayerSelection.RaceDate)</h3>
+        </div>
+        <div class="text-right">
+            <h4>Deadline: <span id="FinalEntry"></span></h4>
         </div>
     
     </div>
@@ -32,13 +35,15 @@
 
             setMaxChangesAllowed(@Model.PlayerSelection.MaxChangesAllowed);
 
+            setFinalEntry(@Model.PlayerSelection.FinalEntry.Subtract(new DateTime(1970, 1,1)).TotalMilliseconds);
+
         });
 
     </script>
     }
 
     <h2>@Html.DisplayFor(model => model.PlayerSelection.TeamName)</h2>
-    <h3><span class="Budget label label-success">Budget: <span class="TotalCost">@Model.PlayerSelection.BudgetSpent.ToString("0.##")</span> / <span class="MaxBudget">@Html.DisplayFor(model => model.PlayerSelection.MaxBudget)</span>m</span></h3>
+    <h3><span class="Budget label-as-badge label label-success">Budget: <span class="TotalCost">@Model.PlayerSelection.BudgetSpent.ToString("0.##")</span> / <span class="MaxBudget">@Html.DisplayFor(model => model.PlayerSelection.MaxBudget)</span>m</span></h3>
     @if (Model.PlayerSelection.FinalEntry < DateTime.Now)
     {
         <span class="label label-danger">Race entries are closed.</span>
@@ -54,7 +59,7 @@
         }
     </div>
     <div>
-        <h4 class="row maxChangesAllowed text-center"><span class="label"></span></h4>
+        <h4 class="maxChangesAllowed text-center"><span class="label"></span></h4>
     </div>
 
     <hr />
@@ -189,8 +194,8 @@
     <div class="row">
 
         <div class="Question col-md-4">
-            <div class="pull-right label label-warning">
-                <h4 class="Points">@Model.Questions[0].Points</h4> Pts
+            <div class="pull-right label-as-badge label label-warning">
+                <h4 class="Points">@Model.Questions[0].Points</h4> Points
             </div>
             <h4>@Html.DisplayFor(model => model.Questions[0].QuestionText)</h4>
             <div class="thumbnail">
@@ -211,8 +216,8 @@
         </div>
 
         <div class="Question col-md-4">
-            <div class="pull-right label label-warning">
-                <h4 class="Points">@Model.Questions[0].Points</h4> Pts
+            <div class="pull-right label-as-badge label label-warning">
+                <h4 class="Points">@Model.Questions[0].Points</h4> Points
             </div>
             <h4>@Html.DisplayFor(model => model.Questions[1].QuestionText)</h4>
             <div class="thumbnail">
@@ -233,8 +238,8 @@
         </div>
 
         <div class="Question col-md-4">
-            <div class="pull-right label label-warning">
-                <h4 class="Points">@Model.Questions[0].Points</h4> Pts
+            <div class="pull-right label-as-badge label label-warning">
+                <h4 class="Points">@Model.Questions[0].Points</h4> Points
             </div>
             <h4>@Html.DisplayFor(model => model.Questions[2].QuestionText)</h4>
             <div class="thumbnail">
@@ -262,7 +267,7 @@
             <span class="label label-danger">Race entries are closed. You cannot make any further changes to your team.</span>
         }
         else {
-            <div>
+            <div class="saveChangesAlert">
                 <h4 class="row maxChangesAllowed"><span class="label"></span></h4>
             </div>
             <input type="submit" value="Save Team" class="btn btn-primary btn-lg saveBtn" />

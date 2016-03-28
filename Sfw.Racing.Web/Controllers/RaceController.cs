@@ -31,6 +31,16 @@ namespace Sfw.Racing.Web.Controllers
             return View(model);
         }
 
+        public virtual ActionResult ClearCache()
+        {
+            List<string> cacheKeys = System.Runtime.Caching.MemoryCache.Default.Select(kvp => kvp.Key).ToList();
+            foreach (string cacheKey in cacheKeys)
+            {
+                System.Runtime.Caching.MemoryCache.Default.Remove(cacheKey);
+            }
+            return View();
+        }
+
         [HttpGet]
         public virtual ActionResult Create()
         {

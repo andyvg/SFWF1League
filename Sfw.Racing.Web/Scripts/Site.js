@@ -219,6 +219,9 @@ function checkMaxChanges() {
 
         var checkComponents = components.slice(0); //clone array
 
+        //if previous race contains D0, then there was no previous selection;
+        if (checkComponents.indexOf("D0") >= 0) return;
+
         $(".DriverSelection").each(function () {
             checkComponents.push("D"+$(this).val());
         });
@@ -229,20 +232,54 @@ function checkMaxChanges() {
             checkComponents.push("E"+$(this).val());
         });
 
-        var uniqueComponents = checkComponents.filter(onlyUnique);
+        var uniqueComponents = checkComponents.filter(onlyUnique);        
 
         if (uniqueComponents.length - 8 > maxChangesAllowed) {
-            //$(".maxChangesAllowed").removeClass("alert-success").addClass("alert-danger");
-            $(".maxChangesAllowed span").removeClass("label-success").addClass("label-danger").text("You've made " + (uniqueComponents.length - 8) + " out of your allowed " + maxChangesAllowed + " changes");
+            $(".maxChangesAllowed span").removeClass("label-success").addClass("label-danger").text("Error: You've made " + (uniqueComponents.length - 8) + " out of your allowed " + maxChangesAllowed + " changes");
             $(".saveBtn").hide();
+            $(".saveChangesAlert").show();
         } else {
-            //$(".maxChangesAllowed").removeClass("alert-danger").addClass("alert-success");
             $(".maxChangesAllowed span").removeClass("label-danger").addClass("label-success").text("You've made " + (uniqueComponents.length - 8) + " out of a possible " + maxChangesAllowed + " changes");
             $(".saveBtn").show();
+            $(".saveChangesAlert").hide();
         }
     }
 }
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
+}
+
+function arraysEqual(a1, a2) {
+    return JSON.stringify(a1) == JSON.stringify(a2);
+}
+
+var finalEntry;
+var finalEntryTimer;
+
+function setFinalEntry(date) {
+    finalEntry = new Date(date);
+    updateFinalEntry();
+
+    finalEntryTimer = setInterval("updateFinalEntry()", 1000)
+}
+
+function updateFinalEntry() {
+    var dateNow = new Date(Math.abs(finalEntry.getTime() - new Date().getTime()));
+
+    var days = Math.round(dateNow / (24 * 60 * 60 * 1000));
+    if (days < 0) {
+        $("#FinalEntry").text("closed");
+        clearInterval(finalEntryTimer);
+    }
+    if (days >= 1) {
+        $("#FinalEntry").text(formatTime((24 * days) + dateNow.getHours()) + "h " + formatTime(dateNow.getMinutes()) + "m " + formatTime(dateNow.getSeconds()) +"s");
+    }
+}
+
+function formatTime(time) {
+    if ((time + "").length == 1) {
+        return "0" + time;
+    }
+    return time;
 }

@@ -4,7 +4,7 @@ CREATE PROCEDURE [dbo].[GetPlayerSelectionByPlayerId] @PlayerId int, @RaceId int
 IF(@RaceId IS NULL)
 	SELECT @RaceId = CurrentRaceId FROM CurrentRace;
 
-SELECT s.*, r.Name AS [RaceName], r.RaceId, r.MaxChangesAllowed, (select min(raceid) from race) [MinRaceId], (select max(raceid) from race) [MaxRaceId], r.Country, r.RaceDate, r.FinalEntry, dbo.GetCost(s.SelectionId) [BudgetSpent], p.MaxBudget, p.Name AS [PlayerName], p.TeamName
+SELECT s.*, r.Name AS [RaceName], r.RaceId, r.MaxChangesAllowed, (select min(r1.RaceId) from Race r1) [MinRaceId], (select max(raceid) from race) [MaxRaceId], r.Country, r.RaceDate, r.FinalEntry, dbo.GetCost(s.SelectionId) [BudgetSpent], p.MaxBudget, p.Name AS [PlayerName], p.TeamName
 FROM Selection s 
 INNER JOIN 
 Race r ON s.SelectionForRaceId = r.RaceId 

@@ -31,6 +31,7 @@ namespace Sfw.Racing.Web.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam = "SelectedLeagueId")]
         public virtual async Task<ActionResult> Index(int? SelectedLeagueId)
         {
             PlayerListViewModel model = new PlayerListViewModel()

@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Sfw.Racing.Web.Models;
 using Sfw.Racing.DataRepository.Core;
 using Sfw.Racing.DataRepository;
+using Exceptions;
 
 namespace Sfw.Racing.Web.Controllers
 {
@@ -46,14 +47,6 @@ namespace Sfw.Racing.Web.Controllers
             get
             {
                 ApplicationUserManager manager = _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                manager.PasswordValidator = new PasswordValidator
-                {
-                    RequiredLength = 6,
-                    RequireNonLetterOrDigit = false,
-                    RequireDigit = false,
-                    RequireLowercase = false,
-                    RequireUppercase = false
-                };
                 return manager;
             }
             private set
@@ -167,8 +160,7 @@ namespace Sfw.Racing.Web.Controllers
                 if (result.Succeeded)
                 {
                     //TODO should be using dependency injection
-                    var conn = new SqlConnectionFactory();
-                    var repo = new Repository(conn);
+                    var repo = new Repository(new SqlConnectionFactory(), new CacheManager());
                     //TODO should be extending ASP.Net membership, rather than splitting the properties into two schema objects
                     var playerId = repo.CreatePlayer(model.Name, model.TeamName);
 
@@ -235,10 +227,25 @@ namespace Sfw.Racing.Web.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                try
+                {
+                    await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                }
+                catch (InvalidApiRequestException ex)
+                {
+                    var detail = new System.Text.StringBuilder();
+
+                    detail.Append("ResponseStatusCode: " + ex.ResponseStatusCode + ".   ");
+                    for (int i = 0; i < ex.Errors.Count(); i++)
+                    {
+                        detail.Append(" -- Error #" + i.ToString() + " : " + ex.Errors[i]);
+                    }
+
+                    throw new ApplicationException(detail.ToString(), ex);
+                }
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
