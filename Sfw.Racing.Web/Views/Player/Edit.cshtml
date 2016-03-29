@@ -44,10 +44,6 @@
 
     <h2>@Html.DisplayFor(model => model.PlayerSelection.TeamName)</h2>
     <h3><span class="Budget label-as-badge label label-success">Budget: <span class="TotalCost">@Model.PlayerSelection.BudgetSpent.ToString("0.##")</span> / <span class="MaxBudget">@Html.DisplayFor(model => model.PlayerSelection.MaxBudget)</span>m</span></h3>
-    @if (Model.PlayerSelection.FinalEntry < DateTime.Now)
-    {
-        <span class="label label-danger">Race entries are closed.</span>
-    }
     <div class="clearfix visible-xs-block"></div>
     <div class="row">
 

@@ -21,6 +21,11 @@ namespace Sfw.Racing.Web.Controllers
             return View();
         }
 
+        public virtual ActionResult LoginStatus()
+        {
+            return PartialView();
+        }
+
         public virtual ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

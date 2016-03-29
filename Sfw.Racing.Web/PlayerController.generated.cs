@@ -160,6 +160,7 @@ namespace Sfw.Racing.Web.Controllers
                 public readonly string EngineDetail = "EngineDetail";
                 public readonly string EngineEdit = "EngineEdit";
                 public readonly string Index = "Index";
+                public readonly string NoEntry = "NoEntry";
             }
             public readonly string ConstructorDetail = "~/Views/Player/ConstructorDetail.cshtml";
             public readonly string ConstructorEdit = "~/Views/Player/ConstructorEdit.cshtml";
@@ -170,6 +171,7 @@ namespace Sfw.Racing.Web.Controllers
             public readonly string EngineDetail = "~/Views/Player/EngineDetail.cshtml";
             public readonly string EngineEdit = "~/Views/Player/EngineEdit.cshtml";
             public readonly string Index = "~/Views/Player/Index.cshtml";
+            public readonly string NoEntry = "~/Views/Player/NoEntry.cshtml";
         }
     }
 

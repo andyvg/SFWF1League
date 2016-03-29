@@ -9,6 +9,7 @@ using Sfw.Racing.Web.Models;
 using System.Threading.Tasks;
 using Sfw.Racing.Web.Controllers.Base;
 using Sfw.Racing.DataRepository.Model;
+using DevTrends.MvcDonutCaching;
 
 namespace Sfw.Racing.Web.Controllers
 {
@@ -31,7 +32,7 @@ namespace Sfw.Racing.Web.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam = "SelectedLeagueId")]
+        [DonutOutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam = "SelectedLeagueId")]
         public virtual async Task<ActionResult> Index(int? SelectedLeagueId)
         {
             PlayerListViewModel model = new PlayerListViewModel()
@@ -72,10 +73,17 @@ namespace Sfw.Racing.Web.Controllers
                 Questions = repository.GetQuestions(RaceId),
             };
 
-            model.DriverPoints = repository.GetDriverPointsBySelectionId(model.PlayerSelection.SelectionId);
-            model.ConstructorPoints = repository.GetConstructorPointsBySelectionId(model.PlayerSelection.SelectionId);
-            model.EnginePoints = repository.GetEnginePointsBySelectionId(model.PlayerSelection.SelectionId);
-            model.QuestionPoints = repository.GetQuestionPointsBySelectionId(model.PlayerSelection.SelectionId);
+            if (model.PlayerSelection != null)
+            {
+                model.DriverPoints = repository.GetDriverPointsBySelectionId(model.PlayerSelection.SelectionId);
+                model.ConstructorPoints = repository.GetConstructorPointsBySelectionId(model.PlayerSelection.SelectionId);
+                model.EnginePoints = repository.GetEnginePointsBySelectionId(model.PlayerSelection.SelectionId);
+                model.QuestionPoints = repository.GetQuestionPointsBySelectionId(model.PlayerSelection.SelectionId);
+            }
+            else
+            {
+                return View(Mvc.Player.Views.NoEntry);
+            }
 
             return View(model);
         }
@@ -101,10 +109,17 @@ namespace Sfw.Racing.Web.Controllers
                 Questions = repository.GetQuestions(RaceId),
             };
 
-            model.DriverPoints = repository.GetDriverPointsBySelectionId(model.PlayerSelection.SelectionId);
-            model.ConstructorPoints = repository.GetConstructorPointsBySelectionId(model.PlayerSelection.SelectionId);
-            model.EnginePoints = repository.GetEnginePointsBySelectionId(model.PlayerSelection.SelectionId);
-            model.QuestionPoints = repository.GetQuestionPointsBySelectionId(model.PlayerSelection.SelectionId);
+            if (model.PlayerSelection != null)
+            {
+                model.DriverPoints = repository.GetDriverPointsBySelectionId(model.PlayerSelection.SelectionId);
+                model.ConstructorPoints = repository.GetConstructorPointsBySelectionId(model.PlayerSelection.SelectionId);
+                model.EnginePoints = repository.GetEnginePointsBySelectionId(model.PlayerSelection.SelectionId);
+                model.QuestionPoints = repository.GetQuestionPointsBySelectionId(model.PlayerSelection.SelectionId);
+            }
+            else
+            {
+                return View(Mvc.Player.Views.NoEntry);
+            }
 
             return View(Mvc.Player.Views.ViewNames.Detail, model);
         }

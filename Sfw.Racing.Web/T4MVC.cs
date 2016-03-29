@@ -196,6 +196,9 @@ namespace Links
             public static readonly string aus_question1_jpg = Url("aus_question1.jpg");
             public static readonly string aus_question2_jpg = Url("aus_question2.jpg");
             public static readonly string aus_question3_png = Url("aus_question3.png");
+            public static readonly string bah_question1_png = Url("bah_question1.png");
+            public static readonly string bah_question2_png = Url("bah_question2.png");
+            public static readonly string bah_question3_png = Url("bah_question3.png");
         }
     
         public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");

@@ -1,4 +1,5 @@
-﻿using Sfw.Racing.DataRepository.Core;
+﻿using DevTrends.MvcDonutCaching;
+using Sfw.Racing.DataRepository.Core;
 using Sfw.Racing.DataRepository.Model;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Sfw.Racing.Web.Controllers
             this.repository = repository;
         }
         // GET: Driver
-        [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam = "EngineId")]
+        [DonutOutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam = "EngineId")]
         public virtual JsonResult Engine(int EngineId)
         {
             Engine d = repository.GetEngineById(EngineId);

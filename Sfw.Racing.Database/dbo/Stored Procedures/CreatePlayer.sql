@@ -1,5 +1,6 @@
 ﻿
-CREATE PROCEDURE CreatePlayer @Name varchar(100), @TeamName varchar(100), @NewId int OUTPUT AS BEGIN 
+
+CREATE PROCEDURE [dbo].[CreatePlayer] @Name varchar(100), @TeamName varchar(100), @NewId int OUTPUT AS BEGIN 
 
 INSERT INTO Player (Name, TeamName, Created, MaxBudget) VALUES (@Name, @TeamName, GETDATE(), 100);
 
@@ -9,6 +10,6 @@ DECLARE @RaceId int;
 
 SELECT @RaceId = CurrentRaceId FROM CurrentRace;
 
-INSERT INTO Selection (PlayerId, SelectionForRaceId) VALUES (@NewId,@RaceId);
+INSERT INTO Selection (PlayerId, SelectionForRaceId) SELECT @NewId,RaceId FROM Race WHERE RaceId <= @RaceId;
 
 END

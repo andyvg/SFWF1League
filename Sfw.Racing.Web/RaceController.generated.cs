@@ -73,6 +73,7 @@ namespace Sfw.Racing.Web.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string ClearCache = "ClearCache";
             public readonly string Create = "Create";
         }
 
@@ -80,6 +81,7 @@ namespace Sfw.Racing.Web.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string ClearCache = "ClearCache";
             public const string Create = "Create";
         }
 
@@ -102,9 +104,11 @@ namespace Sfw.Racing.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string ClearCache = "ClearCache";
                 public readonly string Create = "Create";
                 public readonly string Index = "Index";
             }
+            public readonly string ClearCache = "~/Views/Race/ClearCache.cshtml";
             public readonly string Create = "~/Views/Race/Create.cshtml";
             public readonly string Index = "~/Views/Race/Index.cshtml";
         }
@@ -123,6 +127,17 @@ namespace Sfw.Racing.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ClearCacheOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult ClearCache()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ClearCache);
+            ClearCacheOverride(callInfo);
             return callInfo;
         }
 

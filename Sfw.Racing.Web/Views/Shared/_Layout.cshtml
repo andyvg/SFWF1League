@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using DevTrends.MvcDonutCaching;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -18,16 +19,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("SFW F1 Racing League", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("SFW F1 Racing League", Mvc.Home.Index(), new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Rules", "About", "Home")</li>
-                    <li>@Html.ActionLink("Your Team", "Edit", "Player")</li>
-                    <li>@Html.ActionLink("League Table", "Index", "Player")</li>
+                    <li>@Html.ActionLink("Home", Mvc.Home.Index())</li>
+                    <li>@Html.ActionLink("Rules", Mvc.Home.About())</li>
+                    <li>@Html.ActionLink("Your Team", Mvc.Player.Edit())</li>
+                    <li>@Html.ActionLink("League Table", Mvc.Player.Index())</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @Html.Action("LoginStatus", "Home", excludeFromParentCache: true)
             </div>
         </div>
     </div>

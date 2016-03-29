@@ -411,7 +411,10 @@ namespace Sfw.Racing.DataRepository
                         .ThenChildren(Some<Constructor>.Records)
                         .ThenChildren(Some<Engine>.Records));
 
-                playerSelection = query[0];
+                if (query.Count() > 0)
+                {
+                    playerSelection = query[0];
+                }
             }
 
             return playerSelection;

@@ -15,7 +15,7 @@ namespace Sfw.Racing.Web.ViewModel
         public string Name { get; set; }
         [Display(Name="Total")]
         public int Points { get; set; }
-        [Display(Name="Pos")]
+        [Display(Name="#")]
         public int Position { get; set; }
         [Display(Name = "Budget Spent")]
         [DisplayFormat(DataFormatString ="{0:0.##}")]
@@ -24,7 +24,7 @@ namespace Sfw.Racing.Web.ViewModel
         public int DriverPoints { get; set; }
         [Display(Name = "Engine Pts")]
         public int EnginePoints { get; set; }
-        [Display(Name = "Constructor Pts")]
+        [Display(Name = "Constr. Pts")]
         public int ConstructorPoints { get; set; }
         [Display(Name = "Question Pts")]
         public int QuestionPoints { get; set; }
