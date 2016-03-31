@@ -10,6 +10,7 @@ namespace Sfw.Racing.DataRepository.Core
     public interface IRepository
     {
         IList<Driver> GetDrivers();
+        IList<Driver> GetActiveDrivers();
         Driver GetDriverById(int DriverId);
         Engine GetEngineById(int EngineId);
         Constructor GetConstructorById(int ConstructorId);

@@ -17,6 +17,7 @@ namespace Sfw.Racing.DataRepository.Model
         public decimal Cost { get; set; }
         public string ConstructorName { get; set; }
         public string Image { get; set; }
+        public bool Active { get; set; }
 
         [ParentRecordId]
         int SelectionId { get; set; }

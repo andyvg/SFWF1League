@@ -133,7 +133,7 @@ namespace Sfw.Racing.Web.Controllers
             PlayerSelectionViewModel model = new PlayerSelectionViewModel()
             {
                 PlayerSelection = repository.GetPlayerSelection(PlayerId),
-                Drivers = repository.GetDrivers(),
+                Drivers = repository.GetActiveDrivers(),
                 Constructors = repository.GetConstructors(),
                 Engines = repository.GetEngines(),
                 Questions = repository.GetQuestions()
@@ -164,7 +164,7 @@ namespace Sfw.Racing.Web.Controllers
                     model = new PlayerSelectionViewModel()
                     {
                         PlayerSelection = result.Success ? result.Result : model.PlayerSelection,
-                        Drivers = repository.GetDrivers(),
+                        Drivers = repository.GetActiveDrivers(),
                         Constructors = repository.GetConstructors(),
                         Engines = repository.GetEngines(),
                         Questions = repository.GetQuestions()
@@ -199,7 +199,7 @@ namespace Sfw.Racing.Web.Controllers
 
         private void BindModel(PlayerSelectionViewModel model)
         {
-            model.Drivers = repository.GetDrivers();
+            model.Drivers = repository.GetActiveDrivers();
             model.Constructors = repository.GetConstructors();
             model.Engines = repository.GetEngines();
             model.Questions = repository.GetQuestions();

@@ -307,6 +307,7 @@
     <Content Include="Content\drivers\rosberg.jpg" />
     <Content Include="Content\drivers\sainz.jpg" />
     <Content Include="Content\drivers\unknown.png" />
+    <Content Include="Content\drivers\vandoorne.jpg" />
     <Content Include="Content\drivers\verstappen.jpg" />
     <Content Include="Content\drivers\vettel.jpg" />
     <Content Include="Content\drivers\wehrlein.jpg" />

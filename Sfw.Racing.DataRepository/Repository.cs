@@ -432,5 +432,10 @@ namespace Sfw.Racing.DataRepository
 
             return Race;
         }
+
+        public IList<Driver> GetActiveDrivers()
+        {
+            return GetDrivers().Where(d => d.Active).ToList();
+        }
     }
 }
