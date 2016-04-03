@@ -97,7 +97,9 @@ namespace Sfw.Racing.Web.Controllers
 
             if (player.PlayerId == currentPlayerId)
             {
-                if (RaceId == repository.GetCurrentRace().CurrentRaceId)
+                var curRace = repository.GetCurrentRace();
+
+                if (RaceId == curRace.CurrentRaceId && curRace.CurrentRaceDate > DateTime.Now)
                 {
                     return RedirectToAction(Mvc.Player.Edit());
                 }
@@ -140,6 +142,11 @@ namespace Sfw.Racing.Web.Controllers
             };
 
             CurrentRace race = repository.GetCurrentRace();
+
+            if(race.CurrentRaceDate < DateTime.Now)
+            {
+                return RedirectToAction(Mvc.Player.Detail(model.PlayerSelection.TeamName));
+            }
 
             if (race.PrevRaceId.HasValue)
             {

@@ -9,6 +9,7 @@ namespace Sfw.Racing.DataRepository.Model
     public class CurrentRace
     {
         public int CurrentRaceId { get; set; }
+        public DateTime CurrentRaceDate { get; set; }
         public int? PrevRaceId { get; set; }
         public int? NextRaceId { get; set; }
     }

@@ -16,6 +16,7 @@ namespace Sfw.Racing.DataRepository.Model
         public bool Classified { get; set; }
         public int PositionPoints { get; set; }
         public int FastestLapPoints { get; set; }
+        public int RaceFinishPoints { get; set; }
         public int TeammatePoints { get; set; }
         public int TotalPoints { get; set; }
     }

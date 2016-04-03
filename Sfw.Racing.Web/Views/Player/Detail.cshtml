@@ -27,18 +27,18 @@
 
     <div class="row">
         
+        @if (Model.PlayerSelection.NextRaceId.HasValue)
+        {
+            <div class="col-md-2 pull-right text-right">
+                @Html.ActionLink("Next Race", Mvc.Player.Actions.RaceDetail(Model.PlayerSelection.TeamName, Model.PlayerSelection.NextRaceId.Value))
+            </div>
+        }
         @if (Model.PlayerSelection.PrevRaceId.HasValue)
         {
             <div class="col-md-2 pull-right text-right">
                 @Html.ActionLink("Previous Race", Mvc.Player.Actions.RaceDetail(Model.PlayerSelection.TeamName, Model.PlayerSelection.PrevRaceId.Value))
             </div>
         }
-        @if (Model.PlayerSelection.NextRaceId.HasValue)
-        {
-            <div class="col-md-2 pull-right text-right">
-                @Html.ActionLink("Next Race", Mvc.Player.Actions.RaceDetail(Model.PlayerSelection.TeamName, Model.PlayerSelection.NextRaceId.Value))
-            </div>
-            }
         </div>
     <hr />
 

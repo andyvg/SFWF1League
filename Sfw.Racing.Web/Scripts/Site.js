@@ -265,14 +265,15 @@ function setFinalEntry(date) {
 }
 
 function updateFinalEntry() {
-    var dateNow = new Date(Math.abs(finalEntry.getTime() - new Date().getTime()));
+    var dateNow = new Date(finalEntry.getTime() - new Date().getTime());
 
     var days = Math.round(dateNow / (24 * 60 * 60 * 1000));
-    if (days <= 0) {
+
+    if (days < 0) {
         $("#FinalEntry").addClass("label label-danger").text("closed");
         clearInterval(finalEntryTimer);
     }
-    else if (days >= 1) {
+    else if (days >= 0) {
         $("#FinalEntry").text(formatTime((24 * days) + dateNow.getHours()) + "h " + formatTime(dateNow.getMinutes()) + "m " + formatTime(dateNow.getSeconds()) +"s");
     }
 }
