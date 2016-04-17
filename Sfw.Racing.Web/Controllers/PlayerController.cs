@@ -62,7 +62,8 @@ namespace Sfw.Racing.Web.Controllers
             var currentRace = repository.GetCurrentRace();
             int RaceId = currentRace.CurrentRaceId;
 
-            if (currentRace.PrevRaceId.HasValue)
+            //if there is a previous race, and the current race has not yet run, and the next race is not available
+            if (currentRace.PrevRaceId.HasValue && currentRace.CurrentRaceDate > DateTime.Now && !currentRace.NextRaceId.HasValue)
             {
                 RaceId = currentRace.PrevRaceId.Value;
             }

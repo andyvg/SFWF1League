@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[UpdateRaceResults] AS
+﻿CREATE PROCEDURE [dbo].[UpdateRaceResults] AS
 
 SET XACT_ABORT ON
 
@@ -25,7 +24,7 @@ INNER JOIN Constructor c ON d.ConstructorId = c.ConstructorId
 GROUP BY c.ConstructorId);
 
 -- driver race finish points
-SELECT * FROM RaceResult r INNER JOIN CurrentRace c ON r.RaceId = c.CurrentRaceId
+UPDATE r SET RaceFinishPoints = 5 FROM RaceResult r INNER JOIN CurrentRace c ON r.RaceId = c.CurrentRaceId
 WHERE r.Classified = 1;
 
 --set constructor finish points

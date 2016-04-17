@@ -11,6 +11,8 @@ namespace Sfw.Racing.DataRepository.Model
         public int CurrentRaceId { get; set; }
         public DateTime CurrentRaceDate { get; set; }
         public int? PrevRaceId { get; set; }
+        public DateTime? PrevRaceDate { get; set; }
         public int? NextRaceId { get; set; }
+        public DateTime? NextRaceDate { get; set; }
     }
 }
