@@ -32,12 +32,13 @@ namespace Sfw.Racing.Web.Controllers
         }
 
         [HttpGet]
-        [DonutOutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam = "SelectedLeagueId")]
-        public virtual async Task<ActionResult> Index(int? SelectedLeagueId)
+        [DonutOutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam = "SelectedLeagueId;SelectedRaceId")] 
+        public virtual async Task<ActionResult> Index(int? SelectedLeagueId, int? SelectedRaceId)
         {
             PlayerListViewModel model = new PlayerListViewModel()
-            {
+            { 
                 Leagues = await CurrentLeagues(),
+                Races = repository.GetRaces()
             };
 
             if (SelectedLeagueId.HasValue)
@@ -49,7 +50,12 @@ namespace Sfw.Racing.Web.Controllers
                 model.SelectedLeagueId = model.Leagues[0].LeagueId;
             }
 
-            model.Players = PlayerViewModel.Create(repository.GetPlayerByLeagueId(model.SelectedLeagueId));
+            if (SelectedRaceId.HasValue)
+            {
+                model.SelectedRaceId = SelectedRaceId.Value;
+            }
+
+            model.Players = PlayerViewModel.Create(repository.GetPlayersByLeagueId(model.SelectedLeagueId, model.SelectedRaceId <= 0 ? (int?)null : model.SelectedRaceId));
 
             return View(model);
         }

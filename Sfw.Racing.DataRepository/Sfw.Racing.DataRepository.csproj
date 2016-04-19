@@ -77,6 +77,7 @@
     <Compile Include="Model\EnginePoints.cs" />
     <Compile Include="Model\League.cs" />
     <Compile Include="Model\QuestionPoints.cs" />
+    <Compile Include="Model\Race.cs" />
     <Compile Include="Model\StatusCode.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Question.cs" />

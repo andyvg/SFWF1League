@@ -14,12 +14,17 @@
         <div class="col-md-3">
             @Html.DropDownListFor(m => m.SelectedLeagueId, new SelectList(Model.Leagues, "LeagueId", "Name", Model.SelectedLeagueId), new { @class = "form-control LeagueSelection" })
         </div>
-
-        <div class="col-md-3">
-            <input type="submit" value="Go" class="btn btn-primary" />
-        </div>
     }
+    <div class="col-md-3">
+        @Html.DropDownListFor(m => m.SelectedRaceId, new SelectList(Model.Races, "RaceId", "Name", Model.SelectedRaceId), new { @class = "form-control RaceSelection" })
+    </div>
+
+    <div class="col-md-3">
+        <input type="submit" value="Go" class="btn btn-primary" />
+    </div>
 }
+
+@Html.HiddenFor(m => m.SelectedRaceId)
 
 <div class="clearfix"></div>
 &nbsp;
@@ -68,7 +73,14 @@
                     @Html.DisplayFor(modelItem => item.Position)
                 </td>
                 <td>
-                    @Html.ActionLink(item.TeamName, Mvc.Player.Detail(item.TeamName))
+                    @if (Model.SelectedRaceId > 0)
+                    {
+                        @Html.ActionLink(item.TeamName, Mvc.Player.RaceDetail(item.TeamName, Model.SelectedRaceId))
+                    }
+                    else
+                    {
+                        @Html.ActionLink(item.TeamName, Mvc.Player.Detail(item.TeamName))
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)

@@ -338,13 +338,20 @@ namespace Sfw.Racing.DataRepository
             return response;
         }
 
-        public IList<Player> GetPlayerByLeagueId(int LeagueId)
+        public IList<Player> GetPlayersByLeagueId(int LeagueId, int? RaceId)
         {
             IList<Player> players = null;
 
             using (IDbConnection conn = factory.Create())
             {
-                players = conn.Query<Player>("GetPlayersByLeagueId", new { LeagueId = LeagueId } );
+                if (RaceId.HasValue)
+                {
+                    players = conn.Query<Player>("GetPlayersByLeagueIdRaceId", new { LeagueId = LeagueId, RaceId = RaceId });
+                }
+                else
+                {
+                    players = conn.Query<Player>("GetPlayersByLeagueId", new { LeagueId = LeagueId });
+                }
             }
 
             return players;
@@ -436,6 +443,18 @@ namespace Sfw.Racing.DataRepository
         public IList<Driver> GetActiveDrivers()
         {
             return GetDrivers().Where(d => d.Active).ToList();
+        }
+
+        public IList<Race> GetRaces()
+        {
+            IList<Race> races = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+                races = conn.Query<Race>("GetRaces");
+            }
+
+            return races;
         }
     }
 }

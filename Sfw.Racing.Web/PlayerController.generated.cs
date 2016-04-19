@@ -115,6 +115,7 @@ namespace Sfw.Racing.Web.Controllers
         public class ActionParamsClass_Index
         {
             public readonly string SelectedLeagueId = "SelectedLeagueId";
+            public readonly string SelectedRaceId = "SelectedRaceId";
         }
         static readonly ActionParamsClass_Detail s_params_Detail = new ActionParamsClass_Detail();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -181,14 +182,15 @@ namespace Sfw.Racing.Web.Controllers
         public T4MVC_PlayerController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int? SelectedLeagueId);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int? SelectedLeagueId, int? SelectedRaceId);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index(int? SelectedLeagueId)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index(int? SelectedLeagueId, int? SelectedRaceId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "SelectedLeagueId", SelectedLeagueId);
-            IndexOverride(callInfo, SelectedLeagueId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "SelectedRaceId", SelectedRaceId);
+            IndexOverride(callInfo, SelectedLeagueId, SelectedRaceId);
             return System.Threading.Tasks.Task.FromResult(callInfo as System.Web.Mvc.ActionResult);
         }
 

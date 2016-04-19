@@ -163,6 +163,7 @@ namespace Links
             public static readonly string rosberg_jpg = Url("rosberg.jpg");
             public static readonly string sainz_jpg = Url("sainz.jpg");
             public static readonly string unknown_png = Url("unknown.png");
+            public static readonly string vandoorne_jpg = Url("vandoorne.jpg");
             public static readonly string verstappen_jpg = Url("verstappen.jpg");
             public static readonly string vettel_jpg = Url("vettel.jpg");
             public static readonly string wehrlein_jpg = Url("wehrlein.jpg");
@@ -199,6 +200,9 @@ namespace Links
             public static readonly string bah_question1_png = Url("bah_question1.png");
             public static readonly string bah_question2_png = Url("bah_question2.png");
             public static readonly string bah_question3_png = Url("bah_question3.png");
+            public static readonly string chi_question1_png = Url("chi_question1.png");
+            public static readonly string chi_question2_png = Url("chi_question2.png");
+            public static readonly string chi_question3_png = Url("chi_question3.png");
         }
     
         public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");

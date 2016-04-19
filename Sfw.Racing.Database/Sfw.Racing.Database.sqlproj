@@ -114,5 +114,10 @@
     <Build Include="dbo\Stored Procedures\UpdateNextRace.sql" />
     <Build Include="dbo\Stored Procedures\GetCurrentRaceId.sql" />
     <Build Include="dbo\Functions\GetPlayerChanges.sql" />
+    <Build Include="dbo\Views\PlayerRaceQuestionPoints.sql" />
+    <Build Include="dbo\Views\PlayerRaceEnginePoints.sql" />
+    <Build Include="dbo\Views\PlayerRaceDriverPoints.sql" />
+    <Build Include="dbo\Views\PlayerRaceConstructorPoints.sql" />
+    <Build Include="dbo\Stored Procedures\GetPlayersByLeagueIdRaceId.sql" />
   </ItemGroup>
 </Project>
