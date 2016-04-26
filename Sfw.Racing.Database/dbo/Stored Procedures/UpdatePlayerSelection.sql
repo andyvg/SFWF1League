@@ -14,7 +14,7 @@ BEGIN
 
 		SELECT @MaxChangesAllowed = MaxChangesAllowed FROM Race WHERE RaceId = @RaceId;
 
-		UPDATE Selection SET Driver1Id = @Driver1Id, Driver2Id = @Driver2Id, Driver3Id = @Driver3Id, Driver4Id = @Driver4Id, Constructor1Id = @Constructor1Id, Constructor2Id = @Constructor2Id, Engine1Id = @Engine1Id, Engine2Id = @Engine2Id, Answer1Id = @Answer1Id, Answer2Id = @Answer2Id, Answer3Id = @Answer3Id WHERE PlayerId = @PlayerId AND SelectionForRaceId = @RaceId
+		UPDATE Selection SET Driver1Id = @Driver1Id, Driver2Id = @Driver2Id, Driver3Id = @Driver3Id, Driver4Id = @Driver4Id, Constructor1Id = @Constructor1Id, Constructor2Id = @Constructor2Id, Engine1Id = @Engine1Id, Engine2Id = @Engine2Id, Answer1Id = @Answer1Id, Answer2Id = @Answer2Id, Answer3Id = @Answer3Id, LastUpdated = GETDATE() WHERE PlayerId = @PlayerId AND SelectionForRaceId = @RaceId
 
 		DECLARE @ChangesMade int;
 

@@ -13,6 +13,7 @@
     [Answer1Id]          INT NULL,
     [Answer2Id]          INT NULL,
     [Answer3Id]          INT NULL,
+    [LastUpdated] DATETIME NULL, 
     CONSTRAINT [PK_Selection_Id] PRIMARY KEY CLUSTERED ([SelectionId] ASC),
     CONSTRAINT [FK_PlayerRaceAnswer_Player] FOREIGN KEY ([PlayerId]) REFERENCES [dbo].[Player] ([PlayerId]),
     CONSTRAINT [FK_Selection_Answer1] FOREIGN KEY ([Answer1Id]) REFERENCES [dbo].[Answer] ([AnswerId]),

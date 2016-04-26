@@ -326,6 +326,9 @@
     <Content Include="Content\questions\chi_question1.png" />
     <Content Include="Content\questions\chi_question2.png" />
     <Content Include="Content\questions\chi_question3.png" />
+    <Content Include="Content\questions\rus_question1.png" />
+    <Content Include="Content\questions\rus_question2.png" />
+    <Content Include="Content\questions\rus_question3.png" />
     <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
