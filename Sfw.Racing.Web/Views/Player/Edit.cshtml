@@ -35,7 +35,7 @@
 
             setMaxChangesAllowed(@Model.PlayerSelection.MaxChangesAllowed);
 
-            setFinalEntry(@Model.PlayerSelection.FinalEntry.Subtract(new DateTime(1970, 1,1)).TotalMilliseconds);
+            setFinalEntry("@Model.PlayerSelection.FinalEntry.ToString("yyyy-MM-ddTHH:mm:ss")");
 
         });
 
