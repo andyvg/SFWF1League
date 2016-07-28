@@ -32,7 +32,6 @@ namespace Sfw.Racing.Web.Controllers
         }
 
         [HttpGet]
-        [DonutOutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam = "SelectedLeagueId;SelectedRaceId")] 
         public virtual async Task<ActionResult> Index(int? SelectedLeagueId, int? SelectedRaceId)
         {
             PlayerListViewModel model = new PlayerListViewModel()

@@ -264,10 +264,24 @@ function setFinalEntry(date) {
     finalEntryTimer = setInterval("updateFinalEntry()", 1000)
 }
 
-function updateFinalEntry() {
-    var dateNow = new Date(finalEntry.getTime() - new Date().getTime());
+function treatAsUTC(date) {
+    var result = new Date(date);
+    result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+    return result;
+}
 
-    var days = Math.round(dateNow / (24 * 60 * 60 * 1000));
+function daysBetween(startDate, endDate) {
+    var millisecondsPerDay = 24 * 60 * 60 * 1000;
+    return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
+}
+
+function updateFinalEntry() {
+
+    var now = new Date().getTime();
+
+    var dateNow = new Date(finalEntry - now);
+
+    var days = Math.floor(daysBetween(now, finalEntry));
 
     if (days < 0) {
         $("#FinalEntry").addClass("label label-danger").text("closed");

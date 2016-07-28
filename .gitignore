@@ -255,3 +255,8 @@ paket-files/
 /Sfw.Racing.Web/Web.config
 /Sfw.Racing.Web/Web.Debug.config
 /Sfw.Racing.Web/Web.Release.config
+/Sfw.Racing.Web/Content/questions/*
+/Sfw.Racing.Web/Content/drivers/*
+/Sfw.Racing.Web/Content/engines/*
+/Sfw.Racing.Web/Content/constructors/*
+/Sfw.Racing.Web/Content/Images/background2.jpg
