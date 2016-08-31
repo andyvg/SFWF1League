@@ -23,6 +23,7 @@ namespace Sfw.Racing.Web.ViewModel
         public IList<ConstructorPoints> ConstructorPoints { get; set; }
         public IList<EnginePoints> EnginePoints { get; set; }
         public IList<QuestionPoints> QuestionPoints { get; set; }
+        public IList<PenaltyPoints> PenaltyPoints { get; set; }
 
         public int TotalScore
         {
@@ -30,7 +31,7 @@ namespace Sfw.Racing.Web.ViewModel
             {
                 if (DriverPoints != null && ConstructorPoints != null && EnginePoints != null && QuestionPoints != null)
                 {
-                    return DriverPoints.Sum(p => p.TotalPoints) + ConstructorPoints.Sum(p => p.TotalPoints) + EnginePoints.Sum(p => p.TotalPoints) + QuestionPoints.Sum(p => p.Points);
+                    return DriverPoints.Sum(p => p.TotalPoints) + ConstructorPoints.Sum(p => p.TotalPoints) + EnginePoints.Sum(p => p.TotalPoints) + QuestionPoints.Sum(p => p.Points) + PenaltyPoints.Sum(p => p.Points);
                 }
                 return 0;
             }

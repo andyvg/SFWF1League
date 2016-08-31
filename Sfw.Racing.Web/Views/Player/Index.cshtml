@@ -76,10 +76,18 @@
                     @if (Model.SelectedRaceId > 0)
                     {
                         @Html.ActionLink(item.TeamName, Mvc.Player.RaceDetail(item.TeamName, Model.SelectedRaceId))
+                        if (item.ReceivedBonusPoints)
+                        {
+                            <span class="glyphicon glyphicon-chevron-right" title="Received Catch-up Bonus">&nbsp;</span>
+                        }
                     }
                     else
                     {
                         @Html.ActionLink(item.TeamName, Mvc.Player.Detail(item.TeamName))
+                        if (item.ReceivedBonusPoints)
+                        {
+                            <span class="glyphicon glyphicon-chevron-right" title="Received Catch-up Bonus">&nbsp;</span>
+                        }
                     }
                 </td>
                 <td>

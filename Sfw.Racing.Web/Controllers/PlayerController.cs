@@ -85,6 +85,7 @@ namespace Sfw.Racing.Web.Controllers
                 model.ConstructorPoints = repository.GetConstructorPointsBySelectionId(model.PlayerSelection.SelectionId);
                 model.EnginePoints = repository.GetEnginePointsBySelectionId(model.PlayerSelection.SelectionId);
                 model.QuestionPoints = repository.GetQuestionPointsBySelectionId(model.PlayerSelection.SelectionId);
+                model.PenaltyPoints = repository.GetPenaltyPointsBySelectionId(model.PlayerSelection.SelectionId);
             }
             else
             {
@@ -123,6 +124,7 @@ namespace Sfw.Racing.Web.Controllers
                 model.ConstructorPoints = repository.GetConstructorPointsBySelectionId(model.PlayerSelection.SelectionId);
                 model.EnginePoints = repository.GetEnginePointsBySelectionId(model.PlayerSelection.SelectionId);
                 model.QuestionPoints = repository.GetQuestionPointsBySelectionId(model.PlayerSelection.SelectionId);
+                model.PenaltyPoints = repository.GetPenaltyPointsBySelectionId(model.PlayerSelection.SelectionId);
             }
             else
             {
@@ -146,6 +148,8 @@ namespace Sfw.Racing.Web.Controllers
                 Engines = repository.GetEngines(),
                 Questions = repository.GetQuestions()
             };
+            
+            model.UpdateSelection();
 
             CurrentRace race = repository.GetCurrentRace();
 
@@ -182,6 +186,8 @@ namespace Sfw.Racing.Web.Controllers
                         Engines = repository.GetEngines(),
                         Questions = repository.GetQuestions()
                     };
+
+                    model.UpdateSelection();
 
                     CurrentRace race = repository.GetCurrentRace();
 

@@ -269,7 +269,7 @@ namespace Sfw.Racing.DataRepository
             return results;
         }
 
-        public Response<IList<RaceResult>> CreateRaceResults(IList<RaceResult> results, int FastestLapDriverId)
+        public Response<IList<RaceResult>> CreateRaceResults(IList<RaceResult> results, int FastestLapDriverId, int DriverofDayId)
         {
             Response<IList<RaceResult>> response = new Response<IList<RaceResult>>() { Success = false };
 
@@ -291,6 +291,7 @@ namespace Sfw.Racing.DataRepository
 
                         conn.Execute("UpdateRaceResults", transaction: trans);
                         conn.Execute("UpdateFastestLap", new { DriverId = FastestLapDriverId }, transaction: trans);
+                        conn.Execute("UpdateDriverOfDay", new { DriverId = DriverofDayId }, transaction: trans);
                         response.Success = true;
                         trans.Commit();
                     }
@@ -400,6 +401,18 @@ namespace Sfw.Racing.DataRepository
             using (IDbConnection conn = factory.Create())
             {
                 points = conn.Query<QuestionPoints>("GetQuestionPointsBySelectionId", new { SelectionId = SelectionId });
+            }
+
+            return points;
+        }
+
+        public IList<PenaltyPoints> GetPenaltyPointsBySelectionId(int SelectionId)
+        {
+            IList<PenaltyPoints> points = null;
+
+            using (IDbConnection conn = factory.Create())
+            {
+                points = conn.Query<PenaltyPoints>("GetPenaltyPointsBySelectionId", new { SelectionId = SelectionId });
             }
 
             return points;

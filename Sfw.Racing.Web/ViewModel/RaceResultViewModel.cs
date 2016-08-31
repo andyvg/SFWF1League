@@ -15,5 +15,8 @@ namespace Sfw.Racing.Web.ViewModel
 
         [Required]
         public int FastestLapDriverId { get; set; }
+
+        [Required]
+        public int DriverofDayId { get; set; }
     }
 }

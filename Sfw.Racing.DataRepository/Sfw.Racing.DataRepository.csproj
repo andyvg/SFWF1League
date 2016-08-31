@@ -76,6 +76,7 @@
     <Compile Include="Model\DriverPoints.cs" />
     <Compile Include="Model\EnginePoints.cs" />
     <Compile Include="Model\League.cs" />
+    <Compile Include="Model\PenaltyPoints.cs" />
     <Compile Include="Model\QuestionPoints.cs" />
     <Compile Include="Model\Race.cs" />
     <Compile Include="Model\StatusCode.cs" />

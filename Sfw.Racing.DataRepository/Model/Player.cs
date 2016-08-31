@@ -15,7 +15,7 @@ namespace Sfw.Racing.DataRepository.Model
         {
             get
             {
-                return BasePoints + DriverPoints + EnginePoints + ConstructorPoints + QuestionPoints;
+                return BasePoints + DriverPoints + EnginePoints + ConstructorPoints + QuestionPoints + PenaltyPoints;
             }
         }
         public int BasePoints { get; set; }
@@ -26,5 +26,7 @@ namespace Sfw.Racing.DataRepository.Model
         public decimal BudgetSpent { get; set; }
         public int Position { get; set; }
         public IList<League> Leagues { get; set; }
+        public bool ReceivedBonusPoints { get; set; }
+        public int PenaltyPoints { get; set; }
     }
 }

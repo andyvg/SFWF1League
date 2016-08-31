@@ -7,7 +7,7 @@
     @if (Model.DriverPoints != null)
     {
     <div class="pull-right label-as-badge label label-warning">
-        <h4 class="Cost">@Model.DriverPoints.TotalPoints.ToString("0")</h4> points
+        <h4 class="Points">@Model.DriverPoints.TotalPoints.ToString("0")</h4> points
     </div>
     }
     <h4 class="DriverName">@Html.DisplayFor(model => model.Driver.Name)&nbsp;</h4>

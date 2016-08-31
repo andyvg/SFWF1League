@@ -300,6 +300,7 @@
     <Content Include="Content\drivers\magnussen.jpg" />
     <Content Include="Content\drivers\massa.jpg" />
     <Content Include="Content\drivers\nasr.jpg" />
+    <Content Include="Content\drivers\ocon.jpg" />
     <Content Include="Content\drivers\palmer.jpg" />
     <Content Include="Content\drivers\perez.jpg" />
     <Content Include="Content\drivers\raikkonen.jpg" />
@@ -327,6 +328,9 @@
     <Content Include="Content\questions\bah_question1.png" />
     <Content Include="Content\questions\bah_question2.png" />
     <Content Include="Content\questions\bah_question3.png" />
+    <Content Include="Content\questions\bel_question1.png" />
+    <Content Include="Content\questions\bel_question2.png" />
+    <Content Include="Content\questions\bel_question3.png" />
     <Content Include="Content\questions\can_question1.png" />
     <Content Include="Content\questions\can_question2.png" />
     <Content Include="Content\questions\can_question3.png" />

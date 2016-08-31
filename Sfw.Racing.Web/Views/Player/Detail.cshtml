@@ -19,9 +19,13 @@
     
     <h2>@Html.DisplayFor(model => model.PlayerSelection.TeamName)</h2>
     <h3><span class="Budget label-as-badge label label-success">Budget: <span class="TotalCost">@Model.PlayerSelection.BudgetSpent.ToString("0.##")</span> / <span class="MaxBudget">@Html.DisplayFor(model => model.PlayerSelection.MaxBudget)</span>m</span></h3>
-    @if (@Model.TotalScore > 0)
+    @if (@Model.TotalScore - Model.PenaltyPoints.Sum(p => p.Points) > 0)
     {
-    <h3><span class="label label-as-badge label-warning">Score: @Model.TotalScore points</span></h3>
+    <h3><span class="label label-as-badge label-danger">Score: @Model.TotalScore points</span></h3>
+    }
+    @if (Model.PenaltyPoints.Sum(p => p.Points) != 0)
+    {
+        <h3><span class="label label-as-badge label-warning">Penalty: @Model.PenaltyPoints.Sum(p => p.Points) points</span></h3>
     }
     <div class="clearfix visible-xs-block"></div>
 

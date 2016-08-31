@@ -11,5 +11,6 @@ namespace Sfw.Racing.DataRepository.Model
         public int SelectionId { get; set; }
         public int DriverId { get; set; }
         public int TotalPoints { get; set; }
+        public bool DriverOfTheDay { get; set; }
     }
 }

@@ -145,6 +145,10 @@ $(document).ready(function () {
 
     updateConstructorSelectionDropDown();
 
+    if ($(".TotalCost").text() == "0") {
+        updateCost();
+    }
+
     setTimeout("checkMaxChanges()", 100);
 });
 
@@ -187,6 +191,7 @@ function updateConstructorSelectionDropDown() {
 function updateCost() {
     var totalCost = 0;
     $(".Cost").each(function () {
+        console.log($(this).text())
         totalCost += Number($(this).text());
     })
     $(".TotalCost").text(totalCost);

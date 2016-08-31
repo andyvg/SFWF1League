@@ -28,6 +28,9 @@ namespace Sfw.Racing.Web.ViewModel
         public int ConstructorPoints { get; set; }
         [Display(Name = "Question Pts")]
         public int QuestionPoints { get; set; }
+        [Display(Name="Received Bonus Points")]
+        public bool ReceivedBonusPoints { get; set; }
+        public int PenaltyPoints { get; set; }
 
         public PlayerViewModel(Player player)
         {
@@ -40,6 +43,8 @@ namespace Sfw.Racing.Web.ViewModel
             this.EnginePoints = player.EnginePoints;
             this.ConstructorPoints = player.ConstructorPoints;
             this.QuestionPoints = player.QuestionPoints;
+            this.ReceivedBonusPoints = player.ReceivedBonusPoints;
+            this.PenaltyPoints = player.PenaltyPoints;
         }
 
         public static List<PlayerViewModel> Create(IList<Player> players)
