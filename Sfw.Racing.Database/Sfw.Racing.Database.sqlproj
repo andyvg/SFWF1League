@@ -119,5 +119,10 @@
     <Build Include="dbo\Views\PlayerRaceDriverPoints.sql" />
     <Build Include="dbo\Views\PlayerRaceConstructorPoints.sql" />
     <Build Include="dbo\Stored Procedures\GetPlayersByLeagueIdRaceId.sql" />
+    <Build Include="dbo\Views\PlayerRacePenaltyPoints.sql" />
+    <Build Include="dbo\Views\PlayerRaceBudget.sql" />
+    <Build Include="dbo\Views\PlayerPenaltyPoints.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateDriverOfDay.sql" />
+    <Build Include="dbo\Stored Procedures\GetPenaltyPointsBySelectionId.sql" />
   </ItemGroup>
 </Project>

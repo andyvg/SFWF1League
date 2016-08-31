@@ -1,4 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[UpdateRaceResults] AS
+﻿
+
+CREATE PROCEDURE [dbo].[UpdateRaceResults] AS
 
 SET XACT_ABORT ON
 
@@ -49,32 +51,42 @@ WITH ConstructorTop10Finish AS (
 )
 UPDATE res SET res.Top10Points = c.[Top10Finish] * 5 FROM ConstructorResult res
 INNER JOIN ConstructorTop10Finish c ON res.ConstructorId = c.ConstructorId
-INNER JOIN CurrentRace cr ON res.RaceId = res.RaceId;
+INNER JOIN CurrentRace cr ON cr.CurrentRaceId = res.RaceId;
 
---set Engine finish points
-WITH EngineClassfiedFinish AS (
-	SELECT e.EngineId, (CASE WHEN COUNT(*) > 2 THEN 2 ELSE COUNT(*) END) [ClassifiedCount] FROM Engine e
-	INNER JOIN Constructor c ON c.EngineId = e.EngineId
-	INNER JOIN Driver d ON c.ConstructorId = d.ConstructorId
-	LEFT OUTER JOIN RaceResult r ON r.DriverId = d.DriverId AND r.RaceId = (SELECT cr.CurrentRaceId FROM CurrentRace cr) 
-	WHERE r.Classified = 1
-	GROUP BY e.EngineId
-)
-INSERT INTO EngineResult(RaceId, EngineId, RaceFinishPoints, Top10Points) SELECT cr.CurrentRaceId, cf.EngineId, (CASE WHEN [ClassifiedCount] = 1 THEN 10 WHEN [ClassifiedCount] = 2 THEN 20 ELSE 0 END), 0
-FROM EngineClassfiedFinish cf CROSS JOIN CurrentRace cr;
+
 
 --set Engine top 10 points
 WITH EngineTop10Finish AS (
-	SELECT e.EngineId, (CASE WHEN COUNT(*) > 2 THEN 2 ELSE COUNT(*) END) [Top10Finish] FROM CurrentRace cr
+	SELECT e.EngineId, (CASE WHEN COUNT(*) > 2 THEN 2 ELSE COUNT(*) END)*20 [Top10Finish] FROM CurrentRace cr
 	INNER JOIN RaceResult r ON r.RaceId = cr.CurrentRaceId
 	INNER JOIN Driver d ON r.DriverId = d.DriverId
 	INNER JOIN Constructor c ON d.ConstructorId = c.ConstructorId
-	INNER JOIN Engine e ON e.EngineId = c.EngineId
+	INNER JOIN Engine e ON e.EngineId = c.EngineId AND e.EngineId = 4 --Honda
 	WHERE r.Position <= 10
 	GROUP BY e.EngineId
+	UNION ALL
+	SELECT e.EngineId, (CASE WHEN COUNT(*) > 2 THEN 2 ELSE COUNT(*) END) * 15 [Top10Finish] FROM CurrentRace cr
+	INNER JOIN RaceResult r ON r.RaceId = cr.CurrentRaceId
+	INNER JOIN Driver d ON r.DriverId = d.DriverId
+	INNER JOIN Constructor c ON d.ConstructorId = c.ConstructorId
+	INNER JOIN Engine e ON e.EngineId = c.EngineId AND e.EngineId IN (1,2,3) -- Mercedes, Ferrari, Renault
+	WHERE r.Position <= 5
+	GROUP BY e.EngineId
 )
-UPDATE res SET res.Top10Points = e.[Top10Finish] * 5 FROM EngineResult res
-INNER JOIN EngineTop10Finish e ON res.EngineId = e.EngineId
-INNER JOIN CurrentRace cr ON res.RaceId = res.RaceId;
+INSERT INTO [dbo].[EngineResult]
+           ([RaceId]
+           ,[EngineId]
+           ,[RaceFinishPoints]
+           ,[Top10Points])
+SELECT cr.CurrentRaceId, en.EngineId, 0, coalesce(e.Top10Finish,0) FROM 
+Engine en 
+CROSS JOIN CurrentRace cr
+LEFT OUTER JOIN EngineTop10Finish e ON en.EngineId = e.EngineId;
+
+
+UPDATE s SET PenaltyPoints = -100 FROM Selection s 
+INNER JOIN PlayerRaceBudget b on s.SelectionForRaceId = b.SelectionForRaceId and s.PlayerId = b.PlayerId
+INNER JOIN CurrentRace cr on s.SelectionForRaceId = cr.CurrentRaceId
+where OverBudget = 1
 
 COMMIT TRANSACTION

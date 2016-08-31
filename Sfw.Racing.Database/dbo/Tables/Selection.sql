@@ -1,19 +1,21 @@
 ﻿CREATE TABLE [dbo].[Selection] (
-    [SelectionId]        INT IDENTITY (1, 1) NOT NULL,
-    [SelectionForRaceId] INT NOT NULL,
-    [PlayerId]           INT NOT NULL,
-    [Driver1Id]          INT NULL,
-    [Driver2Id]          INT NULL,
-    [Driver3Id]          INT NULL,
-    [Driver4Id]          INT NULL,
-    [Constructor1Id]     INT NULL,
-    [Constructor2Id]     INT NULL,
-    [Engine1Id]          INT NULL,
-    [Engine2Id]          INT NULL,
-    [Answer1Id]          INT NULL,
-    [Answer2Id]          INT NULL,
-    [Answer3Id]          INT NULL,
-    [LastUpdated] DATETIME NULL, 
+    [SelectionId]        INT          IDENTITY (1, 1) NOT NULL,
+    [SelectionForRaceId] INT          NOT NULL,
+    [PlayerId]           INT          NOT NULL,
+    [Driver1Id]          INT          NULL,
+    [Driver2Id]          INT          NULL,
+    [Driver3Id]          INT          NULL,
+    [Driver4Id]          INT          NULL,
+    [Constructor1Id]     INT          NULL,
+    [Constructor2Id]     INT          NULL,
+    [Engine1Id]          INT          NULL,
+    [Engine2Id]          INT          NULL,
+    [Answer1Id]          INT          NULL,
+    [Answer2Id]          INT          NULL,
+    [Answer3Id]          INT          NULL,
+    [LastUpdated]        DATETIME     NULL,
+    [BudgetSpent]        DECIMAL (18) NULL,
+    [PenaltyPoints]      INT          DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_Selection_Id] PRIMARY KEY CLUSTERED ([SelectionId] ASC),
     CONSTRAINT [FK_PlayerRaceAnswer_Player] FOREIGN KEY ([PlayerId]) REFERENCES [dbo].[Player] ([PlayerId]),
     CONSTRAINT [FK_Selection_Answer1] FOREIGN KEY ([Answer1Id]) REFERENCES [dbo].[Answer] ([AnswerId]),
@@ -29,4 +31,6 @@
     CONSTRAINT [FK_Selection_Engine2] FOREIGN KEY ([Engine2Id]) REFERENCES [dbo].[Engine] ([EngineId]),
     CONSTRAINT [FK_Selection_Race] FOREIGN KEY ([SelectionForRaceId]) REFERENCES [dbo].[Race] ([RaceId])
 );
+
+
 
